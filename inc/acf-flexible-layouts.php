@@ -48,6 +48,11 @@ function hello_child_render_flexible_layout( $layout ) {
     $module_path = get_stylesheet_directory() . '/inc/modules/' . $layout_type . '/render.php';
     
     if ( file_exists( $module_path ) ) {
+        // Handle cloned fields - extract the cloned data
+        if ( isset( $layout[ $layout_type . '_clone' ] ) ) {
+            // Merge cloned fields into $layout
+            $layout = array_merge( $layout, $layout[ $layout_type . '_clone' ] );
+        }
         include $module_path;
     }
 }

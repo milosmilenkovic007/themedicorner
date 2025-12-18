@@ -1,0 +1,35 @@
+[
+    {
+        "key": "group_template_control",
+        "title": "Template Control",
+        "fields": [
+            {
+                "key": "field_use_acf_template",
+                "label": "Use ACF Template",
+                "name": "use_acf_template",
+                "type": "true_false",
+                "instructions": "Enable this to use the ACF template instead of Elementor",
+                "message": "Use ACF template for this page",
+                "default_value": 0,
+                "ui": 1
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "side",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    }
+]

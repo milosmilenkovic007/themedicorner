@@ -1,0 +1,389 @@
+[
+    {
+        "key": "group_page_modules",
+        "title": "Page Modules",
+        "fields": [
+            {
+                "key": "field_page_modules",
+                "label": "Modules",
+                "name": "page_modules",
+                "type": "flexible_content",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layouts": {
+                    "layout_hero_section": {
+                        "key": "layout_hero_section",
+                        "name": "hero-section",
+                        "label": "Hero Section",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_hero_title",
+                                "label": "Title",
+                                "name": "title",
+                                "type": "text",
+                                "required": 1
+                            },
+                            {
+                                "key": "field_hero_subtitle",
+                                "label": "Subtitle",
+                                "name": "subtitle",
+                                "type": "textarea",
+                                "rows": 3
+                            },
+                            {
+                                "key": "field_hero_image",
+                                "label": "Background Image",
+                                "name": "background_image",
+                                "type": "image",
+                                "return_format": "array",
+                                "preview_size": "medium"
+                            },
+                            {
+                                "key": "field_hero_height",
+                                "label": "Hero Height",
+                                "name": "height",
+                                "type": "select",
+                                "choices": {
+                                    "auto": "Auto",
+                                    "small": "Small (400px)",
+                                    "medium": "Medium (600px)",
+                                    "large": "Large (800px)",
+                                    "full": "Full Screen"
+                                },
+                                "default_value": "large"
+                            },
+                            {
+                                "key": "field_hero_overlay",
+                                "label": "Overlay Opacity",
+                                "name": "overlay_opacity",
+                                "type": "slider",
+                                "min": 0,
+                                "max": 100,
+                                "step": 10,
+                                "default_value": 30
+                            },
+                            {
+                                "key": "field_hero_buttons",
+                                "label": "Buttons",
+                                "name": "buttons",
+                                "type": "repeater",
+                                "button_label": "Add Button",
+                                "layout": "table",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_hero_button_text",
+                                        "label": "Button Text",
+                                        "name": "text",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "key": "field_hero_button_link",
+                                        "label": "Button Link",
+                                        "name": "link",
+                                        "type": "url"
+                                    },
+                                    {
+                                        "key": "field_hero_button_style",
+                                        "label": "Button Style",
+                                        "name": "style",
+                                        "type": "select",
+                                        "choices": {
+                                            "primary": "Primary",
+                                            "secondary": "Secondary",
+                                            "white": "White"
+                                        },
+                                        "default_value": "primary"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "layout_heading": {
+                        "key": "layout_heading",
+                        "name": "heading",
+                        "label": "Heading",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_heading_title",
+                                "label": "Title",
+                                "name": "title",
+                                "type": "text",
+                                "required": 1
+                            },
+                            {
+                                "key": "field_heading_tag",
+                                "label": "HTML Tag",
+                                "name": "tag",
+                                "type": "select",
+                                "choices": {
+                                    "h1": "H1",
+                                    "h2": "H2",
+                                    "h3": "H3",
+                                    "h4": "H4",
+                                    "h5": "H5",
+                                    "h6": "H6"
+                                },
+                                "default_value": "h2"
+                            },
+                            {
+                                "key": "field_heading_alignment",
+                                "label": "Alignment",
+                                "name": "alignment",
+                                "type": "select",
+                                "choices": {
+                                    "left": "Left",
+                                    "center": "Center",
+                                    "right": "Right"
+                                },
+                                "default_value": "left"
+                            }
+                        ]
+                    },
+                    "layout_text_editor": {
+                        "key": "layout_text_editor",
+                        "name": "text-editor",
+                        "label": "Text Editor",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_text_content",
+                                "label": "Content",
+                                "name": "content",
+                                "type": "wysiwyg",
+                                "required": 1
+                            }
+                        ]
+                    },
+                    "layout_image": {
+                        "key": "layout_image",
+                        "name": "image",
+                        "label": "Image",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_image",
+                                "label": "Image",
+                                "name": "image",
+                                "type": "image",
+                                "required": 1,
+                                "return_format": "id"
+                            },
+                            {
+                                "key": "field_image_alt",
+                                "label": "Alt Text",
+                                "name": "alt_text",
+                                "type": "text"
+                            },
+                            {
+                                "key": "field_image_caption",
+                                "label": "Caption",
+                                "name": "caption",
+                                "type": "textarea"
+                            },
+                            {
+                                "key": "field_image_width",
+                                "label": "Width (%)",
+                                "name": "width",
+                                "type": "number",
+                                "default_value": 100
+                            }
+                        ]
+                    },
+                    "layout_button": {
+                        "key": "layout_button",
+                        "name": "button",
+                        "label": "Button",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_button_text",
+                                "label": "Button Text",
+                                "name": "text",
+                                "type": "text",
+                                "required": 1
+                            },
+                            {
+                                "key": "field_button_link",
+                                "label": "Button Link",
+                                "name": "link",
+                                "type": "link",
+                                "required": 1
+                            },
+                            {
+                                "key": "field_button_style",
+                                "label": "Style",
+                                "name": "style",
+                                "type": "select",
+                                "choices": {
+                                    "primary": "Primary",
+                                    "secondary": "Secondary",
+                                    "outline": "Outline"
+                                },
+                                "default_value": "primary"
+                            },
+                            {
+                                "key": "field_button_size",
+                                "label": "Size",
+                                "name": "size",
+                                "type": "select",
+                                "choices": {
+                                    "small": "Small",
+                                    "medium": "Medium",
+                                    "large": "Large"
+                                },
+                                "default_value": "medium"
+                            }
+                        ]
+                    },
+                    "layout_icon_list": {
+                        "key": "layout_icon_list",
+                        "name": "icon-list",
+                        "label": "Icon List",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_icon_list_items",
+                                "label": "Items",
+                                "name": "items",
+                                "type": "repeater",
+                                "button_label": "Add Item",
+                                "layout": "table",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_icon_list_item_text",
+                                        "label": "Text",
+                                        "name": "text",
+                                        "type": "text",
+                                        "required": 1
+                                    },
+                                    {
+                                        "key": "field_icon_list_item_icon",
+                                        "label": "Icon Class",
+                                        "name": "icon",
+                                        "type": "text",
+                                        "instructions": "e.g., fa-check, fa-star"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "layout_html": {
+                        "key": "layout_html",
+                        "name": "html",
+                        "label": "HTML",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_html_code",
+                                "label": "HTML Code",
+                                "name": "html_code",
+                                "type": "textarea",
+                                "required": 1,
+                                "rows": 6
+                            }
+                        ]
+                    },
+                    "layout_tabs": {
+                        "key": "layout_tabs",
+                        "name": "tabs",
+                        "label": "Tabs",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_tabs_items",
+                                "label": "Tabs",
+                                "name": "tabs",
+                                "type": "repeater",
+                                "button_label": "Add Tab",
+                                "layout": "table",
+                                "sub_fields": [
+                                    {
+                                        "key": "field_tabs_item_title",
+                                        "label": "Tab Title",
+                                        "name": "title",
+                                        "type": "text",
+                                        "required": 1
+                                    },
+                                    {
+                                        "key": "field_tabs_item_content",
+                                        "label": "Tab Content",
+                                        "name": "content",
+                                        "type": "wysiwyg"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "layout_rating": {
+                        "key": "layout_rating",
+                        "name": "rating",
+                        "label": "Rating",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_rating_value",
+                                "label": "Rating",
+                                "name": "rating",
+                                "type": "number",
+                                "min": 0,
+                                "max": 5,
+                                "step": 0.5,
+                                "required": 1
+                            },
+                            {
+                                "key": "field_rating_label",
+                                "label": "Label",
+                                "name": "label",
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    "layout_shortcode": {
+                        "key": "layout_shortcode",
+                        "name": "shortcode",
+                        "label": "Shortcode",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_shortcode_code",
+                                "label": "Shortcode",
+                                "name": "shortcode",
+                                "type": "textarea",
+                                "required": 1,
+                                "instructions": "Enter WordPress shortcode, e.g., [contact-form-7 id=\"123\"]"
+                            }
+                        ]
+                    }
+                },
+                "button_label": "Add Module",
+                "min": "",
+                "max": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "Flexible content modules for pages"
+    }
+]

@@ -126,7 +126,26 @@ add_filter( 'template_include', 'hello_child_custom_page_template' );
 /**
  * Include additional files
  */
-require_once HELLO_CHILD_DIR . '/inc/acf-fields.php';
 require_once HELLO_CHILD_DIR . '/inc/acf-flexible-layouts.php';
 require_once HELLO_CHILD_DIR . '/inc/migrate-packages.php';
+
+/**
+ * ACF JSON Save Point
+ * Save ACF field groups to JSON files
+ */
+function hello_child_acf_json_save_point( $path ) {
+    $path = get_stylesheet_directory() . '/acf-json';
+    return $path;
+}
+add_filter( 'acf/settings/save_json', 'hello_child_acf_json_save_point' );
+
+/**
+ * ACF JSON Load Points
+ * Load ACF field groups from JSON files
+ */
+function hello_child_acf_json_load_point( $paths ) {
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+}
+add_filter( 'acf/settings/load_json', 'hello_child_acf_json_load_point' );
 // require_once HELLO_CHILD_DIR . '/inc/custom-functions.php';

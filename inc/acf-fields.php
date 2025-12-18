@@ -266,6 +266,53 @@ function hello_child_register_acf_field_groups() {
         'active' => true,
         'description' => 'ACF field group for Our Packages page content',
     ) );
+
+    // General Page Modules - Flexible Content
+    acf_add_local_field_group( array(
+        'key' => 'group_page_modules',
+        'title' => 'Page Modules',
+        'fields' => array(
+            array(
+                'key' => 'field_page_modules',
+                'label' => 'Modules',
+                'name' => 'page_modules',
+                'type' => 'flexible_content',
+                'button_label' => 'Add Module',
+                'layouts' => array(
+                    'hero-section' => array(
+                        'key' => 'layout_hero_section',
+                        'name' => 'hero-section',
+                        'label' => 'Hero Section',
+                        'display' => 'block',
+                        'sub_fields' => array(
+                            array(
+                                'key' => 'field_fc_hero_clone',
+                                'label' => 'Hero Fields',
+                                'name' => 'hero',
+                                'type' => 'clone',
+                                'clone' => array( 'group_hero_section_fields' ),
+                                'display' => 'seamless',
+                                'layout' => 'block',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'page',
+                ),
+            ),
+        ),
+        'position' => 'normal',
+        'style' => 'default',
+        'active' => true,
+        'description' => 'Flexible content modules for pages',
+    ) );
 }
 
 add_action( 'acf/init', 'hello_child_register_acf_field_groups' );

@@ -1,3 +1,4 @@
+<?php
 /**
  * ACF Flexible Content Layouts
  * Sve flexible module u sistemu
@@ -11,10 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Registruj sve ACF flexible content layouts
  */
 function hello_child_register_flexible_layouts() {
-    if ( ! function_exists( 'acf_register_block_type' ) ) {
-        return;
-    }
-    
     // Pronađi sve module i registruj ih
     $modules_dir = get_stylesheet_directory() . '/inc/modules';
     

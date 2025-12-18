@@ -7,12 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$title       = $layout['title'] ?? '';
-$subtitle    = $layout['subtitle'] ?? '';
-$image       = $layout['background_image'] ?? [];
-$height      = $layout['height'] ?? 'large';
-$overlay     = $layout['overlay_opacity'] ?? 30;
-$buttons     = $layout['buttons'] ?? [];
+// Handle both direct fields and cloned hero fields structure
+$hero_data = $layout['hero'] ?? $layout;
+$title       = $hero_data['title'] ?? '';
+$subtitle    = $hero_data['subtitle'] ?? '';
+$image       = $hero_data['background_image'] ?? [];
+$height      = $hero_data['height'] ?? 'large';
+$overlay     = $hero_data['overlay_opacity'] ?? 30;
+$buttons     = $hero_data['buttons'] ?? [];
 
 // Konvertuj visinu
 $height_class = 'hero--' . $height;

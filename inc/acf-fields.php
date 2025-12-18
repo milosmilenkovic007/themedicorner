@@ -316,3 +316,10 @@ function hello_child_register_acf_field_groups() {
 }
 
 add_action( 'acf/init', 'hello_child_register_acf_field_groups' );
+
+// Fallback: Also try registering on init hook in case acf/init doesn't fire
+add_action( 'init', function() {
+    if ( function_exists( 'acf_add_local_field_group' ) ) {
+        hello_child_register_acf_field_groups();
+    }
+}, 5 );

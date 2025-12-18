@@ -1,0 +1,35 @@
+/**
+ * Grid System
+ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $grid-gap;
+
+  &--cols-2 {
+    @include respond-to(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &--cols-3 {
+    @include respond-to(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &--cols-4 {
+    @include respond-to(2xl) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &--gap-sm {
+    gap: $spacing-md;
+  }
+
+  &--gap-lg {
+    gap: $spacing-2xl;
+  }
+}

@@ -1,0 +1,21 @@
+🔍 Analiza Elementor modula i CSS-a...
+
+page_id	page_title	page_slug	data_size
+594	About Us	about-us	70831
+598	Articles	articles	11116
+5797	Check Up In Antalya Abroad	landing	96020
+5854	Check Up In Antalya Abroad - NOT IN USE	ta-site1	96020
+5909	Check Up In Antalya Abroad ALL	landing-all	96020
+5798	Check Up Landing Antalya On Site	landing-antalya-on-site	96020
+596	Contact	contact	16281
+592	Diagnostic Tests	diagnostic-tests	48381
+15	Homepage	homepage	101551
+590	Our Packages	our-packages	163132
+629	Partners	partners	13327
+600	Patients Experience	patients-experience	4411
+623	Privacy Policy	privacy-policy	19067
+4353	Targeted Medical Check-Up	targeted-medical-check-up	78557
+5918	Targeted Medical Check-Up Abroad	targeted-medical-check-up-abroad	78557
+5715	Thank you	thank-you	11701
+
+✅ Analiza dostupna u: elementor-analysis.txt

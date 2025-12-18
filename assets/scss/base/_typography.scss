@@ -1,0 +1,88 @@
+/**
+ * Typography Styles
+ */
+
+// Headings with common styles
+.heading {
+  font-family: $font-family-heading;
+  font-weight: 700;
+  line-height: $line-height-heading;
+  
+  &--1 { font-size: $font-size-4xl; }
+  &--2 { font-size: $font-size-3xl; }
+  &--3 { font-size: $font-size-2xl; }
+  &--4 { font-size: $font-size-xl; }
+  &--5 { font-size: $font-size-lg; }
+  &--6 { font-size: $font-size-base; }
+}
+
+// Lead text
+.lead {
+  font-size: $font-size-lg;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+// Small text
+.small {
+  font-size: $font-size-sm;
+}
+
+// Text utilities
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: $gray-medium;
+}
+
+.text-light {
+  color: $gray-light;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-success {
+  color: $success-color;
+}
+
+.text-danger {
+  color: $error-color;
+}
+
+// Text truncation
+.truncate {
+  @include truncate;
+}
+
+.truncate-2 {
+  @include truncate(2);
+}
+
+.truncate-3 {
+  @include truncate(3);
+}
+
+// Font weights
+.font-light { font-weight: 300; }
+.font-regular { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+// Letter spacing
+.tracking-tight { letter-spacing: -0.5px; }
+.tracking-normal { letter-spacing: 0; }
+.tracking-wide { letter-spacing: 0.5px; }
+.tracking-wider { letter-spacing: 1px; }

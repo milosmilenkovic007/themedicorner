@@ -1,0 +1,109 @@
+/**
+ * Hero Section Module Styles
+ */
+
+.hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  text-align: center;
+  overflow: hidden;
+  min-height: 600px;
+
+  &--auto {
+    min-height: auto;
+    padding: $spacing-3xl $spacing-lg;
+  }
+
+  &--small {
+    min-height: 400px;
+  }
+
+  &--medium {
+    min-height: 600px;
+  }
+
+  &--large {
+    min-height: 800px;
+  }
+
+  &--full-screen {
+    min-height: 100vh;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: $spacing-xl;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  &__title {
+    font-size: $font-size-4xl;
+    font-weight: 700;
+    margin-bottom: $spacing-lg;
+    line-height: 1.2;
+
+    @include respond-to(lg) {
+      font-size: 3.5rem;
+    }
+
+    @include max-width($breakpoint-md) {
+      font-size: $font-size-2xl;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-xl;
+    margin-bottom: $spacing-xl;
+    line-height: 1.8;
+    font-weight: 300;
+
+    @include max-width($breakpoint-md) {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__buttons {
+    @include flex-center(row);
+    gap: $spacing-md;
+    flex-wrap: wrap;
+
+    @include max-width($breakpoint-md) {
+      flex-direction: column;
+
+      a {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

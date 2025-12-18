@@ -126,6 +126,7 @@ add_filter( 'template_include', 'hello_child_custom_page_template' );
 /**
  * Include additional files
  */
+require_once HELLO_CHILD_DIR . '/inc/acf-json-sync.php';
 require_once HELLO_CHILD_DIR . '/inc/acf-flexible-layouts.php';
 require_once HELLO_CHILD_DIR . '/inc/migrate-packages.php';
 

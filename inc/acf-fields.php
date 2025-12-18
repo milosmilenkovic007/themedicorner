@@ -1,163 +1,271 @@
 <?php
 /**
- * ACF Field Groups Registration
- * 
- * Register ACF fields programmatically for Packages page
- * This is better than creating fields in UI because it's version controlled
+ * ACF Field Groups Registration for Hello Elementor Child Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-/**
- * Register ACF Fields for Packages Page
- */
-function hello_child_register_package_fields() {
-    if ( function_exists( 'acf_add_local_field_group' ) ) {
-        
-        // Template Control Field
-        acf_add_local_field_group( array(
-            'key' => 'group_template_control',
-            'title' => 'Template Control',
-            'fields' => array(
-                array(
-                    'key' => 'field_use_acf_template',
-                    'label' => 'Use ACF Template',
-                    'name' => 'use_acf_template',
-                    'type' => 'true_false',
-                    'instructions' => 'Enable this to use ACF template instead of Elementor for this page',
-                    'default_value' => 0,
-                    'ui' => 1,
-                ),
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'post_type',
-                        'operator' => '==',
-                        'value' => 'page',
-                    ),
-                    array(
-                        'param' => 'page',
-                        'operator' => '==',
-                        'value' => '590', // Our Packages page ID
-                    ),
-                ),
-            ),
-            'menu_order' => 0,
-            'position' => 'side',
-            'style' => 'default',
-        ));
+function hello_child_register_acf_field_groups() {
+    if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+        return;
+    }
 
-        // Packages Content Fields
-        acf_add_local_field_group( array(
-            'key' => 'group_packages_content',
-            'title' => 'Packages Content',
-            'fields' => array(
+    // Template Control
+    acf_add_local_field_group( array(
+        'key' => 'group_template_control',
+        'title' => 'Template Control',
+        'fields' => array(
+            array(
+                'key' => 'field_use_acf_template',
+                'label' => 'Use ACF Template',
+                'name' => 'use_acf_template',
+                'type' => 'true_false',
+                'instructions' => 'Enable this to use the ACF template instead of Elementor',
+                'message' => 'Use ACF template for this page',
+                'ui' => 1,
+            ),
+        ),
+        'location' => array(
+            array(
                 array(
-                    'key' => 'field_package_sections',
-                    'label' => 'Package Sections',
-                    'name' => 'package_sections',
-                    'type' => 'repeater',
-                    'instructions' => 'Add different package sections (e.g., Medical Packages, Wellness Packages)',
-                    'layout' => 'block',
-                    'button_label' => 'Add Section',
-                    'sub_fields' => array(
-                        array(
-                            'key' => 'field_section_title',
-                            'label' => 'Section Title',
-                            'name' => 'section_title',
-                            'type' => 'text',
-                            'placeholder' => 'e.g., Medical Packages',
-                        ),
-                        array(
-                            'key' => 'field_section_description',
-                            'label' => 'Section Description',
-                            'name' => 'section_description',
-                            'type' => 'wysiwyg',
-                            'toolbar' => 'basic',
-                            'media_upload' => 0,
-                        ),
-                        array(
-                            'key' => 'field_packages',
-                            'label' => 'Packages',
-                            'name' => 'packages',
-                            'type' => 'repeater',
-                            'layout' => 'block',
-                            'button_label' => 'Add Package',
-                            'sub_fields' => array(
-                                array(
-                                    'key' => 'field_package_name',
-                                    'label' => 'Package Name',
-                                    'name' => 'package_name',
-                                    'type' => 'text',
-                                    'required' => 1,
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'page',
+                ),
+            ),
+        ),
+        'position' => 'side',
+        'style' => 'default',
+        'active' => true,
+    ) );
+
+    // Packages Content
+    acf_add_local_field_group( array(
+        'key' => 'group_packages_content',
+        'title' => 'Packages Content',
+        'fields' => array(
+            // Header group
+            array(
+                'key' => 'field_packages_header',
+                'label' => 'Page Header',
+                'name' => 'packages_header',
+                'type' => 'group',
+                'layout' => 'block',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_header_title',
+                        'label' => 'Title',
+                        'name' => 'title',
+                        'type' => 'text',
+                    ),
+                    array(
+                        'key' => 'field_header_subtitle',
+                        'label' => 'Subtitle',
+                        'name' => 'subtitle',
+                        'type' => 'textarea',
+                        'rows' => 3,
+                    ),
+                    array(
+                        'key' => 'field_header_image',
+                        'label' => 'Header Image',
+                        'name' => 'image',
+                        'type' => 'image',
+                        'return_format' => 'id',
+                    ),
+                    array(
+                        'key' => 'field_header_cta_text',
+                        'label' => 'CTA Button Text',
+                        'name' => 'cta_text',
+                        'type' => 'text',
+                        'default_value' => 'Get a free consultation',
+                    ),
+                    array(
+                        'key' => 'field_header_cta_link',
+                        'label' => 'CTA Button Link',
+                        'name' => 'cta_link',
+                        'type' => 'link',
+                    ),
+                ),
+            ),
+
+            // Sections
+            array(
+                'key' => 'field_package_sections',
+                'label' => 'Package Sections',
+                'name' => 'package_sections',
+                'type' => 'repeater',
+                'layout' => 'block',
+                'button_label' => 'Add Package Section',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_section_title',
+                        'label' => 'Section Title',
+                        'name' => 'section_title',
+                        'type' => 'text',
+                    ),
+                    array(
+                        'key' => 'field_section_description',
+                        'label' => 'Section Description',
+                        'name' => 'section_description',
+                        'type' => 'wysiwyg',
+                        'toolbar' => 'basic',
+                        'media_upload' => 0,
+                    ),
+                    array(
+                        'key' => 'field_packages_repeater',
+                        'label' => 'Packages',
+                        'name' => 'packages',
+                        'type' => 'repeater',
+                        'layout' => 'block',
+                        'button_label' => 'Add Package',
+                        'sub_fields' => array(
+                            array(
+                                'key' => 'field_pkg_name',
+                                'label' => 'Package Name',
+                                'name' => 'name',
+                                'type' => 'text',
+                                'required' => 1,
+                            ),
+                            array(
+                                'key' => 'field_pkg_price',
+                                'label' => 'Price',
+                                'name' => 'price',
+                                'type' => 'text',
+                                'required' => 1,
+                            ),
+                            array(
+                                'key' => 'field_pkg_currency',
+                                'label' => 'Currency',
+                                'name' => 'currency',
+                                'type' => 'select',
+                                'choices' => array(
+                                    'EUR' => '€ EUR',
+                                    'USD' => '$ USD',
+                                    'RSD' => 'дин RSD',
                                 ),
-                                array(
-                                    'key' => 'field_package_price',
-                                    'label' => 'Package Price',
-                                    'name' => 'package_price',
-                                    'type' => 'text',
-                                    'placeholder' => 'e.g., $299',
-                                ),
-                                array(
-                                    'key' => 'field_package_features',
-                                    'label' => 'Package Features',
-                                    'name' => 'package_features',
-                                    'type' => 'wysiwyg',
-                                    'toolbar' => 'basic',
-                                    'media_upload' => 0,
-                                    'instructions' => 'Use bullet points for features',
-                                ),
-                                array(
-                                    'key' => 'field_package_button_text',
-                                    'label' => 'Button Text',
-                                    'name' => 'package_button_text',
-                                    'type' => 'text',
-                                    'placeholder' => 'e.g., Book Now',
-                                    'default_value' => 'Book Now',
-                                ),
-                                array(
-                                    'key' => 'field_package_button_link',
-                                    'label' => 'Button Link',
-                                    'name' => 'package_button_link',
-                                    'type' => 'url',
-                                    'placeholder' => 'https://',
-                                ),
-                                array(
-                                    'key' => 'field_is_featured',
-                                    'label' => 'Featured Package',
-                                    'name' => 'is_featured',
-                                    'type' => 'true_false',
-                                    'instructions' => 'Highlight this package as popular/recommended',
-                                    'default_value' => 0,
-                                    'ui' => 1,
-                                ),
+                                'default_value' => 'EUR',
+                            ),
+                            array(
+                                'key' => 'field_pkg_features',
+                                'label' => 'Features',
+                                'name' => 'features',
+                                'type' => 'wysiwyg',
+                                'toolbar' => 'basic',
+                                'media_upload' => 0,
+                                'instructions' => 'Use list format for features',
+                            ),
+                            array(
+                                'key' => 'field_pkg_btn_text',
+                                'label' => 'Button Text',
+                                'name' => 'button_text',
+                                'type' => 'text',
+                                'default_value' => 'Book Now',
+                            ),
+                            array(
+                                'key' => 'field_pkg_btn_link',
+                                'label' => 'Button Link',
+                                'name' => 'button_link',
+                                'type' => 'link',
+                            ),
+                            array(
+                                'key' => 'field_pkg_featured',
+                                'label' => 'Featured Package',
+                                'name' => 'is_featured',
+                                'type' => 'true_false',
+                                'ui' => 1,
+                            ),
+                            array(
+                                'key' => 'field_pkg_badge',
+                                'label' => 'Badge Text',
+                                'name' => 'badge_text',
+                                'type' => 'text',
+                                'instructions' => 'e.g., "Most Popular", "Best Value"',
                             ),
                         ),
                     ),
                 ),
             ),
-            'location' => array(
-                array(
+
+            // Bottom CTA
+            array(
+                'key' => 'field_cta_section',
+                'label' => 'Bottom CTA Section',
+                'name' => 'cta_section',
+                'type' => 'group',
+                'layout' => 'block',
+                'sub_fields' => array(
                     array(
-                        'param' => 'post_type',
-                        'operator' => '==',
-                        'value' => 'page',
+                        'key' => 'field_cta_enabled',
+                        'label' => 'Show CTA Section',
+                        'name' => 'enabled',
+                        'type' => 'true_false',
+                        'ui' => 1,
                     ),
                     array(
-                        'param' => 'page',
-                        'operator' => '==',
-                        'value' => '590', // Our Packages page ID
+                        'key' => 'field_cta_heading',
+                        'label' => 'Heading',
+                        'name' => 'heading',
+                        'type' => 'text',
+                        'conditional_logic' => array(
+                            array(
+                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
+                            ),
+                        ),
+                    ),
+                    array(
+                        'key' => 'field_cta_text',
+                        'label' => 'Text Content',
+                        'name' => 'text',
+                        'type' => 'textarea',
+                        'rows' => 3,
+                        'conditional_logic' => array(
+                            array(
+                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
+                            ),
+                        ),
+                    ),
+                    array(
+                        'key' => 'field_cta_btn_text',
+                        'label' => 'Button Text',
+                        'name' => 'button_text',
+                        'type' => 'text',
+                        'default_value' => 'Schedule Your Check-up',
+                        'conditional_logic' => array(
+                            array(
+                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
+                            ),
+                        ),
+                    ),
+                    array(
+                        'key' => 'field_cta_btn_link',
+                        'label' => 'Button Link',
+                        'name' => 'button_link',
+                        'type' => 'link',
+                        'conditional_logic' => array(
+                            array(
+                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
+                            ),
+                        ),
                     ),
                 ),
             ),
-            'menu_order' => 1,
-            'position' => 'normal',
-            'style' => 'default',
-            'active' => true,
-        ));
-    }
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_id',
+                    'operator' => '==',
+                    'value' => '590',
+                ),
+            ),
+        ),
+        'position' => 'normal',
+        'style' => 'default',
+        'active' => true,
+        'description' => 'ACF field group for Our Packages page content',
+    ) );
 }
-add_action( 'acf/init', 'hello_child_register_package_fields' );
+
+add_action( 'acf/init', 'hello_child_register_acf_field_groups' );

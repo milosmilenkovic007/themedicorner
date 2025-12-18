@@ -128,4 +128,5 @@ add_filter( 'template_include', 'hello_child_custom_page_template' );
  */
 require_once HELLO_CHILD_DIR . '/inc/acf-fields.php';
 require_once HELLO_CHILD_DIR . '/inc/acf-flexible-layouts.php';
+require_once HELLO_CHILD_DIR . '/inc/migrate-packages.php';
 // require_once HELLO_CHILD_DIR . '/inc/custom-functions.php';

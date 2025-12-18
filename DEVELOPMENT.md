@@ -88,10 +88,11 @@ npm run analyze        # Analiza Elementor modula
 3. Testirajte da se CSS i JS učitavaju na sajtu
 
 ### Faza 2: Our Packages Stranica
-1. Kreirajte ACF flexible content polje sa dostupnim module-ima
-2. Mapirajte postojeći Elementor sadržaj na ACF module
-3. Testirajte frontend i stilove
-4. Deploy u production
+1. Otvorite WP Admin → Tools → "Migrate Packages to ACF"
+2. Čekirajte "Dry Run" i kliknite "Run Migration" da vidite preview (header, sekcije, paketi)
+3. Ako sve izgleda dobro, isključite "Dry Run" i kliknite "Run Migration" da snimite ACF polja
+4. Stranica automatski uključuje `use_acf_template` za ID 590
+5. Testirajte frontend i stilove, zatim deploy u production
 
 ### Faza 3: Ostale Stranice
 Hronološki redosled migracije:
@@ -147,13 +148,13 @@ git commit -m "Build updates"
 
 1. **Stranica na WordPress Admin**
    - Odaberi Page > [Stranica]
-   - Dodaj flexible content module iz ACF
-   - Popuni polja
+   - Tools → "Migrate Packages to ACF" (Dry Run → Run, zatim Save)
+   - Po potrebi ručno dotunuj ACF polja (price/currency/badge)
    - Save/Publish
 
 2. **Preview**
    - Pogledaj frontend
-   - Sve auto-renderira se sa template-ima
+   - Render ide preko ACF template-a; ako treba stil, prilagodite SCSS
 
 ## 📁 File Locations
 

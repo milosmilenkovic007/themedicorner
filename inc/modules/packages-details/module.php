@@ -172,6 +172,8 @@ if ( empty( $sections_order ) ) {
 <?php 
 $pkg_count = count( $packages_data ); 
 
+$root_style = $arrow_style . ' --pkg-cols: ' . (string) $pkg_count . ';';
+
 // Debug: Final counts before render
 if ( current_user_can( 'manage_options' ) && ! empty( $_GET['debug_packages'] ) ) {
     echo '<!-- pkg_count: ' . $pkg_count . ' -->';
@@ -200,7 +202,7 @@ if ( $pkg_count === 0 ) {
             <p class="packages-details__subheading"><?php echo wp_kses_post( $description ); ?></p>
         <?php endif; ?>
 
-        <div class="packages-details is-active-0" data-packages-details data-count="<?php echo esc_attr( (string) $pkg_count ); ?>" style="<?php echo esc_attr( $arrow_style ); ?>">
+        <div class="packages-details is-active-0" data-packages-details data-count="<?php echo esc_attr( (string) $pkg_count ); ?>" style="<?php echo esc_attr( $root_style ); ?>">
             <div class="packages-details__tabs" role="tablist" aria-label="Packages">
                 <?php foreach ( $packages_data as $idx => $pkg ) : ?>
                     <?php $tab_slug = sanitize_title( (string) ( $pkg['title'] ?? '' ) ); ?>

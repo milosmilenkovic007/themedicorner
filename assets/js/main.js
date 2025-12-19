@@ -66,18 +66,32 @@ import '../scss/main.scss';
         });
       };
 
-      const initDesktopRows = ($root) => {
+      const resetSectionsState = ($root) => {
+        // Desktop rows
         const $rows = $root.find('.packages-details__grid-row[data-pd-row]');
-        if (!$rows.length) return;
-        $rows.each(function(i) {
-          const $row = $(this);
-          const $toggle = $row.find('[data-pd-row-toggle]').first();
-          const shouldOpen = i < 2;
-          $row.toggleClass('is-collapsed', !shouldOpen);
-          if ($toggle.length) {
-            $toggle.attr('aria-expanded', shouldOpen ? 'true' : 'false');
-          }
-        });
+        if ($rows.length) {
+          $rows.each(function(i) {
+            const $row = $(this);
+            const $toggle = $row.find('[data-pd-row-toggle]').first();
+            const shouldOpen = i === 0;
+            $row.toggleClass('is-collapsed', !shouldOpen);
+            if ($toggle.length) {
+              $toggle.attr('aria-expanded', shouldOpen ? 'true' : 'false');
+            }
+          });
+        }
+
+        // Mobile <details>
+        const $details = $root.find('.packages-details__accordion-item');
+        if ($details.length) {
+          $details.each(function(i) {
+            if (i === 0) {
+              $(this).attr('open', 'open');
+            } else {
+              $(this).removeAttr('open');
+            }
+          });
+        }
       };
 
       // Init each module
@@ -86,7 +100,7 @@ import '../scss/main.scss';
         const $first = $root.find('.packages-details__tab').first();
         const initIdx = $first.length ? Number($first.data('index')) : 0;
         setActive($root, Number.isNaN(initIdx) ? 0 : initIdx);
-        initDesktopRows($root);
+        resetSectionsState($root);
       });
 
       // Click handler
@@ -95,6 +109,7 @@ import '../scss/main.scss';
         const $root = $btn.closest('[data-packages-details]');
         if (!$root.length) return;
         setActive($root, $btn.data('index'));
+        resetSectionsState($root);
       });
 
       const toggleRow = ($root, $toggle) => {

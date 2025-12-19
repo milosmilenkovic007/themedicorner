@@ -25,13 +25,22 @@
 
   .packages-details {
     width: 100%;
+    
   }
 
   .packages-details__tabs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
-    margin: 0 0 18px;
+    // Align tabs with the desktop table columns:
+    // [section title column] + [package columns]
+    grid-template-columns: 220px repeat(var(--pkg-cols), minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+
+    // Spacer so the first tab starts above the first package column (not the section column)
+    &::before {
+      content: '';
+      display: block;
+    }
   }
 
   .packages-details__tab {
@@ -39,17 +48,21 @@
     --pd-tab-fg: #053b3f;
 
     appearance: none;
-    border: 1px solid rgba(5, 59, 63, 0.15);
+    box-sizing: border-box;
+    border: 0px solid rgba(5, 59, 63, 0.15);
     background: var(--pd-tab-bg);
     color: var(--pd-tab-fg);
     border-radius: 10px;
     padding: 20px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.2;
+    font-size: 14px;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
       filter 0.25s ease;
+      border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 
     &:hover {
       background-color: var(--pd-tab-bg);
@@ -59,7 +72,9 @@
 
     &.is-active,
     &[aria-selected="true"] {
-      border-color: currentColor;
+      background-color: var(--pd-tab-bg);
+      color: var(--pd-tab-fg);
+      border: 1px solid currentColor;
       filter: none;
     }
   }
@@ -93,6 +108,7 @@
     border: 1px solid rgba(5, 59, 63, 0.12);
     border-radius: 14px;
     overflow: hidden;
+    border-top-right-radius: 0;
   }
 
   .packages-details__grid-row {
@@ -187,7 +203,7 @@
   }
 
   .packages-details__items {
-    background: #ffffff;
+    background: #ebf2f2;
   }
 
   // Column background colors when the first tab is active (Essential)
@@ -315,6 +331,10 @@
       overflow-x: auto;
       padding-bottom: 4px;
       -webkit-overflow-scrolling: touch;
+
+      &::before {
+        content: none;
+      }
     }
 
     .packages-details__tab {

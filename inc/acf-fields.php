@@ -96,6 +96,18 @@ function hello_child_register_acf_field_groups() {
                                 ),
                                 'default_value' => 'large',
                             ),
+                            array(
+                                'key' => 'field_hero_button_text',
+                                'label' => 'Button Text',
+                                'name' => 'button_text',
+                                'type' => 'text',
+                            ),
+                            array(
+                                'key' => 'field_hero_button_link',
+                                'label' => 'Button Link',
+                                'name' => 'button_link',
+                                'type' => 'url',
+                            ),
                         ),
                     ),
                     // Packages Showcase

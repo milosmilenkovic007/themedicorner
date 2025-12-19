@@ -6,95 +6,116 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
-  min-height: 600px;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
 
-  &--auto {
-    min-height: auto;
-    padding: $spacing-3xl $spacing-lg;
-  }
-
-  &--small {
-    min-height: 400px;
-  }
-
-  &--medium {
-    min-height: 600px;
-  }
-
-  &--large {
-    min-height: 700px;
-  }
-
-  &--full-screen {
-    min-height: 100vh;
-  }
+ 
 
   &__inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-3xl;
-    align-items: center;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 20px;
+    align-items: stretch;
     width: 100%;
-    max-width: 1200px;
     margin: 0 auto;
-    padding: $spacing-3xl $spacing-lg;
+    height: 100%;
+    padding: 70px;
 
     @include max-width($breakpoint-lg) {
       grid-template-columns: 1fr;
       gap: $spacing-2xl;
-      padding: $spacing-2xl $spacing-lg;
     }
 
     @include max-width($breakpoint-md) {
-      padding: $spacing-xl $spacing-md;
+      gap: $spacing-lg;
     }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    gap: $spacing-lg;
-    animation: fadeInUp 0.8s ease-out;
+    gap: 20px;
+    background-color: #EBF2F2;
+    padding: 0px 48px 0px 48px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 150px;
+      height: 150px;
+      background-image: url('../images/m-corner-shape-lg.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    @include max-width($breakpoint-lg) {
+      padding: $spacing-2xl;
+      max-width: 100%;
+    }
   }
 
   &__title {
-    font-size: 2.5rem;
+    font-size: 56px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.12;
     color: #053B3F;
+    margin: 0;
 
     @include max-width($breakpoint-lg) {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
 
     @include max-width($breakpoint-md) {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
     }
   }
 
   &__subtitle {
-    font-size: $font-size-lg;
-    line-height: 1.6;
-    color: #666;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #294244;
     font-weight: 400;
+    margin: 0;
+    max-width: 440px;
 
     @include max-width($breakpoint-md) {
-      font-size: $font-size-base;
+      font-size: 1rem;
     }
   }
 
   &__button {
     display: inline-flex;
     width: fit-content;
+    margin-top: $spacing-md;
 
     .btn {
-      padding: $spacing-md $spacing-2xl;
-      border-radius: 50px;
+      padding: 16px 32px;
+      border-radius: 100px;
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s ease;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      border: none;
+      cursor: pointer;
+      font-size: $font-size-base;
+      line-height: 1.2em;
+      text-transform: none;
+      letter-spacing: 0;
 
       &--primary {
         background-color: #00A579;
@@ -102,6 +123,24 @@
 
         &:hover {
           background-color: #008561;
+          transform: translateY(-2px);
+        }
+
+        .btn__icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.3s ease;
+        }
+
+        .btn__icon img {
+          width: 18px;
+          height: 10px;
+          display: block;
+        }
+
+        &:hover .btn__icon {
+          transform: translateX(4px);
         }
       }
     }
@@ -110,29 +149,24 @@
   &__image {
     position: relative;
     width: 100%;
+    height: 100%;
     border-radius: 20px;
     overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
 
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       object-fit: cover;
+      aspect-ratio: 1.5;
     }
 
     @include max-width($breakpoint-lg) {
       max-width: 100%;
+      min-height: 400px;
     }
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }

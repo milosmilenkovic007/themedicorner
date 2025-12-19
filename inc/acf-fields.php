@@ -107,6 +107,13 @@ function hello_child_register_acf_field_groups() {
                                 'label' => 'Button Link',
                                 'name' => 'button_link',
                                 'type' => 'url',
+                                                        array(
+                                                            'key' => 'field_hero_bg_color',
+                                                            'label' => 'Content Background Color',
+                                                            'name' => 'bg_color',
+                                                            'type' => 'color',
+                                                            'default_value' => '#EBF2F2',
+                                                        ),
                             ),
                         ),
                     ),

@@ -13,6 +13,7 @@ $image    = $data['field_hero_image'] ?? $data['background_image'] ?? [];
 $height   = $data['field_hero_height'] ?? $data['height'] ?? 'large';
 $button_text = $data['field_hero_button_text'] ?? $data['button_text'] ?? '';
 $button_link = $data['field_hero_button_link'] ?? $data['button_link'] ?? '';
+$bg_color = $data['field_hero_bg_color'] ?? $data['bg_color'] ?? '#EBF2F2';
 
 $height_class = 'hero--' . $height;
 if ( $height === 'full' ) {
@@ -34,7 +35,7 @@ if ( ! empty( $image ) ) {
 
 <section class="hero-section-module <?php echo esc_attr( $height_class ); ?>">
     <div class="hero-section-module__inner">
-        <div class="hero-section-module__content">
+        <div class="hero-section-module__content" style="background-color: <?php echo esc_attr( $bg_color ); ?>">
             <?php if ( $title ) : ?>
                 <h1 class="hero-section-module__title"><?php echo wp_kses_post( $title ); ?></h1>
             <?php endif; ?>
@@ -46,7 +47,10 @@ if ( ! empty( $image ) ) {
             <?php if ( $button_text && $button_link ) : ?>
                 <div class="hero-section-module__button">
                     <a href="<?php echo esc_url( $button_link ); ?>" class="btn btn--primary">
-                        <?php echo esc_html( $button_text ); ?>
+                        <span class="btn__text"><?php echo esc_html( $button_text ); ?></span>
+                        <span class="btn__icon" aria-hidden="true">
+                            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/arrow.svg' ); ?>" alt="" />
+                        </span>
                     </a>
                 </div>
             <?php endif; ?>

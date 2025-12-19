@@ -40,6 +40,12 @@ $sections_map = array();
 
 $had_selection = ! empty( $selected );
 
+// Debug: Show selected IDs
+if ( current_user_can( 'manage_options' ) && ! empty( $_GET['debug_packages'] ) ) {
+    echo '<!-- had_selection: ' . ( $had_selection ? 'YES' : 'NO' ) . ' -->';
+    echo '<!-- selected IDs: ' . esc_html( implode( ', ', $selected ) ) . ' -->';
+}
+
 if ( ! empty( $selected ) ) {
     // Use get_post() per ID to avoid query filters/caching issues and to allow
     // admins to preview draft packages while building the page.
@@ -155,7 +161,26 @@ if ( empty( $sections_order ) ) {
 }
 ?>
 
-<?php $pkg_count = count( $packages_data ); ?>
+<?php 
+$pkg_count = count( $packages_data ); 
+
+// Debug: Final counts before render
+if ( current_user_can( 'manage_options' ) && ! empty( $_GET['debug_packages'] ) ) {
+    echo '<!-- pkg_count: ' . $pkg_count . ' -->';
+    echo '<!-- sections_order: ' . count( $sections_order ) . ' -->';
+    echo '<!-- packages_data: ' . esc_html( print_r( array_map( function( $p ) {
+        return array( 'id' => $p['id'], 'title' => $p['title'], 'sections_count' => count( $p['sections'] ) );
+    }, $packages_data ), true ) ) . ' -->';
+}
+
+// If no packages, don't render anything
+if ( $pkg_count === 0 ) {
+    if ( current_user_can( 'manage_options' ) && ! empty( $_GET['debug_packages'] ) ) {
+        echo '<!-- EARLY RETURN: pkg_count === 0 -->';
+    }
+    return;
+}
+?>
 
 <section class="module-packages-details">
     <div class="packages-details__inner">
@@ -185,24 +210,21 @@ if ( empty( $sections_order ) ) {
             <!-- Desktop table -->
             <div class="packages-details__table" aria-label="Packages comparison table">
                 <div class="packages-details__grid" style="--pkg-cols: <?php echo esc_attr( (string) $pkg_count ); ?>">
-                    <div class="packages-details__grid-row packages-details__grid-row--head">
-                        <div class="packages-details__cell packages-details__corner"></div>
-                        <?php foreach ( $packages_data as $idx => $pkg ) : ?>
-                            <div class="packages-details__cell packages-details__col-head" data-col="<?php echo esc_attr( (string) $idx ); ?>">
-                                <?php echo esc_html( $pkg['title'] ?? '' ); ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-                    <?php foreach ( $sections_order as $sec_key ) : ?>
+                    <?php foreach ( $sections_order as $sec_idx => $sec_key ) : ?>
                         <?php
                             $sec = $sections_map[ $sec_key ] ?? null;
                             if ( ! is_array( $sec ) ) { continue; }
                             $line1 = (string) ( $sec['title_line_1'] ?? '' );
                             $line2 = (string) ( $sec['title_line_2'] ?? '' );
                         ?>
-                        <div class="packages-details__grid-row">
-                            <div class="packages-details__cell packages-details__section-title">
+                        <div class="packages-details__grid-row" data-pd-row data-pd-row-index="<?php echo esc_attr( (string) $sec_idx ); ?>">
+                            <div
+                                class="packages-details__cell packages-details__section-title"
+                                role="button"
+                                tabindex="0"
+                                aria-expanded="true"
+                                data-pd-row-toggle
+                            >
                                 <?php if ( $line1 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line1 ); ?></span><?php endif; ?>
                                 <?php if ( $line2 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line2 ); ?></span><?php endif; ?>
                             </div>
@@ -232,14 +254,16 @@ if ( empty( $sections_order ) ) {
 
             <!-- Mobile accordion -->
             <div class="packages-details__accordion" aria-label="Packages includes accordion">
-                <?php foreach ( $sections_order as $sec_key ) : ?>
+                <?php foreach ( $sections_order as $sec_idx => $sec_key ) : ?>
                     <?php
                         $sec = $sections_map[ $sec_key ] ?? null;
                         if ( ! is_array( $sec ) ) { continue; }
                         $line1 = (string) ( $sec['title_line_1'] ?? '' );
                         $line2 = (string) ( $sec['title_line_2'] ?? '' );
+                        // Open first 2 sections by default
+                        $is_open = $sec_idx < 2;
                     ?>
-                    <details class="packages-details__accordion-item" open>
+                    <details class="packages-details__accordion-item"<?php echo $is_open ? ' open' : ''; ?>>
                         <summary class="packages-details__accordion-summary">
                             <?php if ( $line1 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line1 ); ?></span><?php endif; ?>
                             <?php if ( $line2 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line2 ); ?></span><?php endif; ?>

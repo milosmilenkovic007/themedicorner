@@ -18,6 +18,10 @@
     max-width: 720px;
     margin: 0 auto 34px;
     color: rgba(5, 59, 63, 0.8);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.8em;
+}
   }
 
   .packages-details {
@@ -42,12 +46,19 @@
     line-height: 1.2;
     cursor: pointer;
     text-align: center;
+    transition: all 0.2s ease;
 
     &.is-active,
     &[aria-selected="true"] {
       background: #053B3F;
       color: #ffffff;
       border-color: transparent;
+    }
+    
+    &:not(.is-active):not([aria-selected="true"]) {
+      background: #EBF2F2;
+      color: #053B3F;
+      border-color: rgba(5, 59, 63, 0.15);
     }
   }
 
@@ -102,6 +113,26 @@
   .packages-details__section-title {
     font-weight: 700;
     color: #053B3F;
+    cursor: pointer;
+    user-select: none;
+
+    &:focus {
+      outline: 2px solid rgba(5, 59, 63, 0.25);
+      outline-offset: 2px;
+    }
+  }
+
+  // Desktop row accordion (collapse section rows)
+  .packages-details__grid-row.is-collapsed {
+    grid-template-columns: 1fr;
+
+    .packages-details__items {
+      display: none;
+    }
+
+    .packages-details__section-title {
+      grid-column: 1 / -1;
+    }
   }
 
   .packages-details__section-line {

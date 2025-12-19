@@ -81,6 +81,29 @@ import '../scss/main.scss';
         if (!$root.length) return;
         setActive($root, $btn.data('index'));
       });
+
+      const toggleRow = ($toggle) => {
+        const $row = $toggle.closest('.packages-details__grid-row');
+        if (!$row.length) return;
+        const isCollapsed = $row.hasClass('is-collapsed');
+        $row.toggleClass('is-collapsed', !isCollapsed);
+        $toggle.attr('aria-expanded', isCollapsed ? 'true' : 'false');
+      };
+
+      // Desktop: collapse/expand section rows (accordion-like)
+      $(document).on('click', '[data-packages-details] .packages-details__section-title[data-pd-row-toggle]', function(e) {
+        // Avoid interfering with any nested interactive elements (if introduced later)
+        if ($(e.target).closest('a, button, input, select, textarea').length) return;
+        toggleRow($(this));
+      });
+
+      $(document).on('keydown', '[data-packages-details] .packages-details__section-title[data-pd-row-toggle]', function(e) {
+        const key = e.key || e.keyCode;
+        if (key === 'Enter' || key === ' ' || key === 13 || key === 32) {
+          e.preventDefault();
+          toggleRow($(this));
+        }
+      });
     },
 
     initializeCarousels() {

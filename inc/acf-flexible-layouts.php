@@ -40,9 +40,29 @@ function hello_child_render_flexible_layout( $layout ) {
     $layout_type = $layout['acf_fc_layout'] ?? '';
     $module_path = get_stylesheet_directory() . '/inc/modules/' . $layout_type . '/module.php';
 
+    // Debug
+    if ( current_user_can( 'manage_options' ) && ! empty( $_GET['debug_packages'] ) ) {
+        echo '<!-- hello_child_render_flexible_layout: layout_type=' . esc_html( $layout_type ) . ' -->';
+        echo '<!-- module_path=' . esc_html( $module_path ) . ' -->';
+        echo '<!-- file_exists=' . ( file_exists( $module_path ) ? 'YES' : 'NO' ) . ' -->';
+    }
+
     if ( file_exists( $module_path ) ) {
-        // Pass layout data into module template
-        $data = $layout;
+        // Transform field names
+        $data = array();
+        
+        // Special handling for packages-details layout with its unique field key naming
+        if ( $layout_type === 'packages-details' ) {
+            // Map ACF field keys to field names
+            $data['heading']     = $layout['field_details_heading'] ?? '';
+            $data['description'] = $layout['field_details_description'] ?? '';
+            $data['packages']    = $layout['field_details_packages'] ?? array();
+            $data['acf_fc_layout'] = $layout['acf_fc_layout'];
+        } else {
+            // Default: keep all data as-is
+            $data = $layout;
+        }
+        
         include $module_path;
     }
 }

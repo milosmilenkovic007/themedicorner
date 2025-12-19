@@ -1,0 +1,52 @@
+.module-cta-section {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #ebf2f2 0%, #fff 100%);
+  .cta-section__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+    display: grid;
+    gap: 24px;
+  }
+  .cta-section__heading {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .cta-section__content {
+    color: #294244;
+  }
+  .cta-section__features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .cta-section__feature {
+    background: #fff;
+    border: 1px solid #c1cecf;
+    border-radius: 12px;
+    padding: 16px;
+    display: grid;
+    gap: 8px;
+  }
+  .cta-section__feature-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .cta-section__feature-description {
+    margin: 0;
+    color: #294244;
+  }
+  .cta-section__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: #053b3f;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+}

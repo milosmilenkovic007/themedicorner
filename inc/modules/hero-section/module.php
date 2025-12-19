@@ -1,26 +1,25 @@
 <?php
 /**
- * Hero Section Module Render
+ * Hero Section Module
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$title       = $data['title'] ?? '';
-$subtitle    = $data['subtitle'] ?? '';
-$image       = $data['background_image'] ?? [];
-$height      = $data['height'] ?? 'large';
+$title    = $data['title'] ?? '';
+$subtitle = $data['subtitle'] ?? '';
+$image    = $data['background_image'] ?? [];
+$height   = $data['height'] ?? 'large';
 
 $height_class = 'hero--' . $height;
 if ( $height === 'full' ) {
     $height_class = 'hero--full-screen';
 }
 
-// Background image style
 $bg_style = '';
 if ( ! empty( $image ) && isset( $image['url'] ) ) {
-    $bg_style = 'background-image: url(\'' . esc_url( $image['url'] ) . '\');';
+    $bg_style = 'background-image: url(' . esc_url( $image['url'] ) . ')';
 }
 ?>
 

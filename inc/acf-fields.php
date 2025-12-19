@@ -41,233 +41,7 @@ function hello_child_register_acf_field_groups() {
         'active' => true,
     ) );
 
-    // Packages Content
-    acf_add_local_field_group( array(
-        'key' => 'group_packages_content',
-        'title' => 'Packages Content',
-        'fields' => array(
-            // Header group
-            array(
-                'key' => 'field_packages_header',
-                'label' => 'Page Header',
-                'name' => 'packages_header',
-                'type' => 'group',
-                'layout' => 'block',
-                'sub_fields' => array(
-                    array(
-                        'key' => 'field_header_title',
-                        'label' => 'Title',
-                        'name' => 'title',
-                        'type' => 'text',
-                    ),
-                    array(
-                        'key' => 'field_header_subtitle',
-                        'label' => 'Subtitle',
-                        'name' => 'subtitle',
-                        'type' => 'textarea',
-                        'rows' => 3,
-                    ),
-                    array(
-                        'key' => 'field_header_image',
-                        'label' => 'Header Image',
-                        'name' => 'image',
-                        'type' => 'image',
-                        'return_format' => 'id',
-                    ),
-                    array(
-                        'key' => 'field_header_cta_text',
-                        'label' => 'CTA Button Text',
-                        'name' => 'cta_text',
-                        'type' => 'text',
-                        'default_value' => 'Get a free consultation',
-                    ),
-                    array(
-                        'key' => 'field_header_cta_link',
-                        'label' => 'CTA Button Link',
-                        'name' => 'cta_link',
-                        'type' => 'link',
-                    ),
-                ),
-            ),
-
-            // Sections
-            array(
-                'key' => 'field_package_sections',
-                'label' => 'Package Sections',
-                'name' => 'package_sections',
-                'type' => 'repeater',
-                'layout' => 'block',
-                'button_label' => 'Add Package Section',
-                'sub_fields' => array(
-                    array(
-                        'key' => 'field_section_title',
-                        'label' => 'Section Title',
-                        'name' => 'section_title',
-                        'type' => 'text',
-                    ),
-                    array(
-                        'key' => 'field_section_description',
-                        'label' => 'Section Description',
-                        'name' => 'section_description',
-                        'type' => 'wysiwyg',
-                        'toolbar' => 'basic',
-                        'media_upload' => 0,
-                    ),
-                    array(
-                        'key' => 'field_packages_repeater',
-                        'label' => 'Packages',
-                        'name' => 'packages',
-                        'type' => 'repeater',
-                        'layout' => 'block',
-                        'button_label' => 'Add Package',
-                        'sub_fields' => array(
-                            array(
-                                'key' => 'field_pkg_name',
-                                'label' => 'Package Name',
-                                'name' => 'name',
-                                'type' => 'text',
-                                'required' => 1,
-                            ),
-                            array(
-                                'key' => 'field_pkg_price',
-                                'label' => 'Price',
-                                'name' => 'price',
-                                'type' => 'text',
-                                'required' => 1,
-                            ),
-                            array(
-                                'key' => 'field_pkg_currency',
-                                'label' => 'Currency',
-                                'name' => 'currency',
-                                'type' => 'select',
-                                'choices' => array(
-                                    'EUR' => '€ EUR',
-                                    'USD' => '$ USD',
-                                    'RSD' => 'дин RSD',
-                                ),
-                                'default_value' => 'EUR',
-                            ),
-                            array(
-                                'key' => 'field_pkg_features',
-                                'label' => 'Features',
-                                'name' => 'features',
-                                'type' => 'wysiwyg',
-                                'toolbar' => 'basic',
-                                'media_upload' => 0,
-                                'instructions' => 'Use list format for features',
-                            ),
-                            array(
-                                'key' => 'field_pkg_btn_text',
-                                'label' => 'Button Text',
-                                'name' => 'button_text',
-                                'type' => 'text',
-                                'default_value' => 'Book Now',
-                            ),
-                            array(
-                                'key' => 'field_pkg_btn_link',
-                                'label' => 'Button Link',
-                                'name' => 'button_link',
-                                'type' => 'link',
-                            ),
-                            array(
-                                'key' => 'field_pkg_featured',
-                                'label' => 'Featured Package',
-                                'name' => 'is_featured',
-                                'type' => 'true_false',
-                                'ui' => 1,
-                            ),
-                            array(
-                                'key' => 'field_pkg_badge',
-                                'label' => 'Badge Text',
-                                'name' => 'badge_text',
-                                'type' => 'text',
-                                'instructions' => 'e.g., "Most Popular", "Best Value"',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-
-            // Bottom CTA
-            array(
-                'key' => 'field_cta_section',
-                'label' => 'Bottom CTA Section',
-                'name' => 'cta_section',
-                'type' => 'group',
-                'layout' => 'block',
-                'sub_fields' => array(
-                    array(
-                        'key' => 'field_cta_enabled',
-                        'label' => 'Show CTA Section',
-                        'name' => 'enabled',
-                        'type' => 'true_false',
-                        'ui' => 1,
-                    ),
-                    array(
-                        'key' => 'field_cta_heading',
-                        'label' => 'Heading',
-                        'name' => 'heading',
-                        'type' => 'text',
-                        'conditional_logic' => array(
-                            array(
-                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'key' => 'field_cta_text',
-                        'label' => 'Text Content',
-                        'name' => 'text',
-                        'type' => 'textarea',
-                        'rows' => 3,
-                        'conditional_logic' => array(
-                            array(
-                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'key' => 'field_cta_btn_text',
-                        'label' => 'Button Text',
-                        'name' => 'button_text',
-                        'type' => 'text',
-                        'default_value' => 'Schedule Your Check-up',
-                        'conditional_logic' => array(
-                            array(
-                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'key' => 'field_cta_btn_link',
-                        'label' => 'Button Link',
-                        'name' => 'button_link',
-                        'type' => 'link',
-                        'conditional_logic' => array(
-                            array(
-                                array('field' => 'field_cta_enabled', 'operator' => '==', 'value' => '1'),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-        'location' => array(
-            array(
-                array(
-                    'param' => 'post_id',
-                    'operator' => '==',
-                    'value' => '590',
-                ),
-            ),
-        ),
-        'position' => 'normal',
-        'style' => 'default',
-        'active' => true,
-        'description' => 'ACF field group for Our Packages page content',
-    ) );
-
-    // General Page Modules - Flexible Content
+    // Page Modules - Flexible Content with all layouts
     acf_add_local_field_group( array(
         'key' => 'group_page_modules',
         'title' => 'Page Modules',
@@ -280,178 +54,247 @@ function hello_child_register_acf_field_groups() {
                 'button_label' => 'Add Module',
                 'layouts' => array(
                     // Hero Section
-                    'hero-section' => array(
+                    array(
                         'key' => 'layout_hero_section',
                         'name' => 'hero-section',
                         'label' => 'Hero Section',
                         'display' => 'block',
                         'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_hero_clone',
-                                'label' => 'Hero Fields',
-                                'name' => 'hero',
-                                'type' => 'clone',
-                                'clone' => array( 'group_hero_section_fields' ),
-                                'display' => 'seamless',
-                                'layout' => 'block',
+                                'key' => 'field_hero_title',
+                                'label' => 'Title',
+                                'name' => 'title',
+                                'type' => 'text',
+                                'required' => 1,
+                            ),
+                            array(
+                                'key' => 'field_hero_subtitle',
+                                'label' => 'Subtitle',
+                                'name' => 'subtitle',
+                                'type' => 'textarea',
+                                'rows' => 3,
+                            ),
+                            array(
+                                'key' => 'field_hero_image',
+                                'label' => 'Background Image',
+                                'name' => 'background_image',
+                                'type' => 'image',
+                                'return_format' => 'array',
+                            ),
+                            array(
+                                'key' => 'field_hero_height',
+                                'label' => 'Hero Height',
+                                'name' => 'height',
+                                'type' => 'select',
+                                'choices' => array(
+                                    'auto' => 'Auto',
+                                    'small' => 'Small (400px)',
+                                    'medium' => 'Medium (600px)',
+                                    'large' => 'Large (800px)',
+                                    'full' => 'Full Screen',
+                                ),
+                                'default_value' => 'large',
                             ),
                         ),
                     ),
-                    // Heading
-                    'heading' => array(
-                        'key' => 'layout_heading',
-                        'name' => 'heading',
-                        'label' => 'Heading',
+                    // Packages Showcase
+                    array(
+                        'key' => 'layout_packages_showcase',
+                        'name' => 'packages-showcase',
+                        'label' => 'Packages Showcase',
                         'display' => 'block',
                         'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_heading_clone',
-                                'name' => 'heading_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_heading_module' ),
-                                'display' => 'seamless',
+                                'key' => 'field_showcase_title',
+                                'label' => 'Section Title',
+                                'name' => 'title',
+                                'type' => 'text',
+                            ),
+                            array(
+                                'key' => 'field_showcase_packages',
+                                'label' => 'Packages',
+                                'name' => 'packages',
+                                'type' => 'repeater',
+                                'button_label' => 'Add Package',
                                 'layout' => 'block',
+                                'sub_fields' => array(
+                                    array(
+                                        'key' => 'field_showcase_pkg_name',
+                                        'label' => 'Package Name',
+                                        'name' => 'name',
+                                        'type' => 'text',
+                                        'required' => 1,
+                                    ),
+                                    array(
+                                        'key' => 'field_showcase_pkg_number',
+                                        'label' => 'Number',
+                                        'name' => 'number',
+                                        'type' => 'text',
+                                    ),
+                                    array(
+                                        'key' => 'field_showcase_pkg_description',
+                                        'label' => 'Description',
+                                        'name' => 'description',
+                                        'type' => 'textarea',
+                                        'rows' => 3,
+                                    ),
+                                    array(
+                                        'key' => 'field_showcase_pkg_featured',
+                                        'label' => 'Featured',
+                                        'name' => 'is_featured',
+                                        'type' => 'true_false',
+                                        'ui' => 1,
+                                    ),
+                                ),
                             ),
                         ),
                     ),
-                    // Text Editor
-                    'text-editor' => array(
-                        'key' => 'layout_text_editor',
-                        'name' => 'text-editor',
-                        'label' => 'Text Editor',
+                    // Packages Details
+                    array(
+                        'key' => 'layout_packages_details',
+                        'name' => 'packages-details',
+                        'label' => 'Packages Details',
                         'display' => 'block',
                         'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_text_editor_clone',
-                                'name' => 'text_editor_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_text_editor_module' ),
-                                'display' => 'seamless',
+                                'key' => 'field_details_title',
+                                'label' => 'Section Title',
+                                'name' => 'title',
+                                'type' => 'text',
+                            ),
+                            array(
+                                'key' => 'field_details_accordions',
+                                'label' => 'Accordion Sections',
+                                'name' => 'accordions',
+                                'type' => 'repeater',
+                                'button_label' => 'Add Accordion',
                                 'layout' => 'block',
+                                'sub_fields' => array(
+                                    array(
+                                        'key' => 'field_accordion_title',
+                                        'label' => 'Title',
+                                        'name' => 'title',
+                                        'type' => 'text',
+                                        'required' => 1,
+                                    ),
+                                    array(
+                                        'key' => 'field_accordion_items',
+                                        'label' => 'Items',
+                                        'name' => 'items',
+                                        'type' => 'repeater',
+                                        'button_label' => 'Add Item',
+                                        'layout' => 'block',
+                                        'sub_fields' => array(
+                                            array(
+                                                'key' => 'field_item_text',
+                                                'label' => 'Text',
+                                                'name' => 'text',
+                                                'type' => 'text',
+                                                'required' => 1,
+                                            ),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
-                    // Image
-                    'image' => array(
-                        'key' => 'layout_image',
-                        'name' => 'image',
-                        'label' => 'Image',
+                    // Testimonials
+                    array(
+                        'key' => 'layout_testimonials',
+                        'name' => 'testimonials',
+                        'label' => 'Testimonials',
                         'display' => 'block',
                         'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_image_clone',
-                                'name' => 'image_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_image_module' ),
-                                'display' => 'seamless',
-                                'layout' => 'block',
+                                'key' => 'field_testimonials_title',
+                                'label' => 'Section Title',
+                                'name' => 'title',
+                                'type' => 'text',
+                            ),
+                            array(
+                                'key' => 'field_testimonials_rating_text',
+                                'label' => 'Rating Text',
+                                'name' => 'rating_text',
+                                'type' => 'text',
+                                'default_value' => 'Rated 5/5 Based on 109 reviews',
+                            ),
+                            array(
+                                'key' => 'field_testimonials_shortcode',
+                                'label' => 'Shortcode',
+                                'name' => 'shortcode',
+                                'type' => 'text',
                             ),
                         ),
                     ),
-                    // Button
-                    'button' => array(
-                        'key' => 'layout_button',
-                        'name' => 'button',
-                        'label' => 'Button',
+                    // CTA Section
+                    array(
+                        'key' => 'layout_cta_section',
+                        'name' => 'cta-section',
+                        'label' => 'CTA Section',
                         'display' => 'block',
                         'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_button_clone',
-                                'name' => 'button_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_button_module' ),
-                                'display' => 'seamless',
-                                'layout' => 'block',
+                                'key' => 'field_cta_heading',
+                                'label' => 'Heading',
+                                'name' => 'heading',
+                                'type' => 'text',
+                                'required' => 1,
                             ),
-                        ),
-                    ),
-                    // Icon List
-                    'icon-list' => array(
-                        'key' => 'layout_icon_list',
-                        'name' => 'icon-list',
-                        'label' => 'Icon List',
-                        'display' => 'block',
-                        'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_icon_list_clone',
-                                'name' => 'icon_list_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_icon_list_module' ),
-                                'display' => 'seamless',
-                                'layout' => 'block',
+                                'key' => 'field_cta_content',
+                                'label' => 'Content',
+                                'name' => 'content',
+                                'type' => 'wysiwyg',
+                                'toolbar' => 'basic',
+                                'media_upload' => 0,
                             ),
-                        ),
-                    ),
-                    // HTML
-                    'html' => array(
-                        'key' => 'layout_html',
-                        'name' => 'html',
-                        'label' => 'HTML',
-                        'display' => 'block',
-                        'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_html_clone',
-                                'name' => 'html_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_html_module' ),
-                                'display' => 'seamless',
+                                'key' => 'field_cta_features',
+                                'label' => 'Features',
+                                'name' => 'features',
+                                'type' => 'repeater',
+                                'button_label' => 'Add Feature',
                                 'layout' => 'block',
+                                'sub_fields' => array(
+                                    array(
+                                        'key' => 'field_cta_feature_icon',
+                                        'label' => 'Icon',
+                                        'name' => 'icon',
+                                        'type' => 'image',
+                                        'return_format' => 'array',
+                                    ),
+                                    array(
+                                        'key' => 'field_cta_feature_title',
+                                        'label' => 'Title',
+                                        'name' => 'title',
+                                        'type' => 'text',
+                                        'required' => 1,
+                                    ),
+                                    array(
+                                        'key' => 'field_cta_feature_text',
+                                        'label' => 'Description',
+                                        'name' => 'description',
+                                        'type' => 'textarea',
+                                        'rows' => 2,
+                                    ),
+                                ),
                             ),
-                        ),
-                    ),
-                    // Tabs
-                    'tabs' => array(
-                        'key' => 'layout_tabs',
-                        'name' => 'tabs',
-                        'label' => 'Tabs',
-                        'display' => 'block',
-                        'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_tabs_clone',
-                                'name' => 'tabs_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_tabs_module' ),
-                                'display' => 'seamless',
-                                'layout' => 'block',
+                                'key' => 'field_cta_button_text',
+                                'label' => 'Button Text',
+                                'name' => 'button_text',
+                                'type' => 'text',
+                                'default_value' => 'Get a free consultation',
                             ),
-                        ),
-                    ),
-                    // Rating
-                    'rating' => array(
-                        'key' => 'layout_rating',
-                        'name' => 'rating',
-                        'label' => 'Rating',
-                        'display' => 'block',
-                        'sub_fields' => array(
                             array(
-                                'key' => 'field_fc_rating_clone',
-                                'name' => 'rating_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_rating_module' ),
-                                'display' => 'seamless',
-                                'layout' => 'block',
-                            ),
-                        ),
-                    ),
-                    // Shortcode
-                    'shortcode' => array(
-                        'key' => 'layout_shortcode',
-                        'name' => 'shortcode',
-                        'label' => 'Shortcode',
-                        'display' => 'block',
-                        'sub_fields' => array(
-                            array(
-                                'key' => 'field_fc_shortcode_clone',
-                                'name' => 'shortcode_clone',
-                                'type' => 'clone',
-                                'clone' => array( 'group_shortcode_module' ),
-                                'display' => 'seamless',
-                                'layout' => 'block',
+                                'key' => 'field_cta_button_link',
+                                'label' => 'Button Link',
+                                'name' => 'button_link',
+                                'type' => 'link',
                             ),
                         ),
                     ),
                 ),
-            ),
         ),
         'location' => array(
             array(
@@ -465,15 +308,8 @@ function hello_child_register_acf_field_groups() {
         'position' => 'normal',
         'style' => 'default',
         'active' => true,
-        'description' => 'Flexible content modules for pages',
+        'description' => 'Flexible content page modules',
     ) );
 }
 
 add_action( 'acf/init', 'hello_child_register_acf_field_groups' );
-
-// Fallback: Also try registering on init hook in case acf/init doesn't fire
-add_action( 'init', function() {
-    if ( function_exists( 'acf_add_local_field_group' ) ) {
-        hello_child_register_acf_field_groups();
-    }
-}, 5 );

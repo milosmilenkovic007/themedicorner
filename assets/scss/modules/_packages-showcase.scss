@@ -1,0 +1,37 @@
+.module-packages-showcase {
+  padding: 80px 0;
+  .packages-showcase__title {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .packages-showcase__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .packages-showcase__item {
+    background: #f7fbfb;
+    border: 1px solid #c1cecf;
+    border-radius: 12px;
+    padding: 24px;
+    &.is-featured {
+      border-color: #053b3f;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+  }
+  .packages-showcase__number {
+    font-size: 14px;
+    font-weight: 700;
+    color: #053b3f;
+    margin-bottom: 8px;
+  }
+  .packages-showcase__name {
+    margin: 0 0 12px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .packages-showcase__description {
+    margin: 0;
+    color: #294244;
+  }
+}

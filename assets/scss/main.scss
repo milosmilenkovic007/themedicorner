@@ -23,19 +23,15 @@
 @import 'components/modals';
 
 // Modules (ACF Flexible Content modules)
-@import 'modules/hero';
-@import 'modules/text-image';
-@import 'modules/features';
+@import 'modules/hero-section';
+@import 'modules/packages-showcase';
+@import 'modules/packages-details';
 @import 'modules/testimonials';
-@import 'modules/packages';
-@import 'modules/accordion';
-@import 'modules/gallery';
-@import 'modules/cta';
+@import 'modules/cta-section';
 
 // Pages
 @import 'pages/homepage';
 @import 'pages/packages';
-@import 'pages/packages-acf';
 
 // Utilities
 @import 'abstracts/utilities';

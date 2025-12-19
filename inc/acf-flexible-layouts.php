@@ -29,13 +29,6 @@ function hello_child_register_flexible_layouts() {
 }
 add_action( 'acf/init', 'hello_child_register_flexible_layouts' );
 
-// Fallback hook if acf/init doesn't fire
-add_action( 'init', function() {
-    if ( function_exists( 'acf_add_local_field_group' ) ) {
-        hello_child_register_flexible_layouts();
-    }
-}, 6 );
-
 /**
  * Render flexible content layout
  */
@@ -43,16 +36,13 @@ function hello_child_render_flexible_layout( $layout ) {
     if ( empty( $layout ) || ! is_array( $layout ) ) {
         return;
     }
-    
+
     $layout_type = $layout['acf_fc_layout'] ?? '';
-    $module_path = get_stylesheet_directory() . '/inc/modules/' . $layout_type . '/render.php';
-    
+    $module_path = get_stylesheet_directory() . '/inc/modules/' . $layout_type . '/module.php';
+
     if ( file_exists( $module_path ) ) {
-        // Handle cloned fields - extract the cloned data
-        if ( isset( $layout[ $layout_type . '_clone' ] ) ) {
-            // Merge cloned fields into $layout
-            $layout = array_merge( $layout, $layout[ $layout_type . '_clone' ] );
-        }
+        // Pass layout data into module template
+        $data = $layout;
         include $module_path;
     }
 }

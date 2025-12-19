@@ -32,6 +32,14 @@ if ( is_array( $selected ) ) {
 }
 
 $checkmark_url = HELLO_CHILD_URI . '/assets/images/checkmark-svgrepo-com.svg';
+$arrow_up_url  = HELLO_CHILD_URI . '/assets/images/up-svgrepo-com.svg';
+$arrow_down_url = HELLO_CHILD_URI . '/assets/images/chevron-down-svgrepo-com.svg';
+
+$arrow_style = sprintf(
+    "--pd-arrow-open: url('%s'); --pd-arrow-closed: url('%s');",
+    esc_url_raw( $arrow_up_url ),
+    esc_url_raw( $arrow_down_url )
+);
 
 // Build packages data + section union.
 $packages_data = array();
@@ -192,11 +200,12 @@ if ( $pkg_count === 0 ) {
             <p class="packages-details__subheading"><?php echo wp_kses_post( $description ); ?></p>
         <?php endif; ?>
 
-        <div class="packages-details is-active-0" data-packages-details data-count="<?php echo esc_attr( (string) $pkg_count ); ?>">
+        <div class="packages-details is-active-0" data-packages-details data-count="<?php echo esc_attr( (string) $pkg_count ); ?>" style="<?php echo esc_attr( $arrow_style ); ?>">
             <div class="packages-details__tabs" role="tablist" aria-label="Packages">
                 <?php foreach ( $packages_data as $idx => $pkg ) : ?>
+                    <?php $tab_slug = sanitize_title( (string) ( $pkg['title'] ?? '' ) ); ?>
                     <button
-                        class="packages-details__tab<?php echo $idx === 0 ? ' is-active' : ''; ?>"
+                        class="packages-details__tab packages-details__tab--<?php echo esc_attr( (string) $idx ); ?><?php echo $tab_slug ? ' packages-details__tab--' . esc_attr( $tab_slug ) : ''; ?><?php echo $idx === 0 ? ' is-active' : ''; ?>"
                         type="button"
                         role="tab"
                         aria-selected="<?php echo $idx === 0 ? 'true' : 'false'; ?>"

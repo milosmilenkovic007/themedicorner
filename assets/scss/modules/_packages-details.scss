@@ -17,11 +17,10 @@
     text-align: center;
     max-width: 720px;
     margin: 0 auto 34px;
-    color: rgba(5, 59, 63, 0.8);
+    color: #053b3f;
     font-size: 19px;
     font-weight: 400;
     line-height: 1.8em;
-}
   }
 
   .packages-details {
@@ -36,30 +35,49 @@
   }
 
   .packages-details__tab {
+    --pd-tab-bg: #ebf2f2;
+    --pd-tab-fg: #053b3f;
+
     appearance: none;
     border: 1px solid rgba(5, 59, 63, 0.15);
-    background: #EBF2F2;
-    color: #053B3F;
+    background: var(--pd-tab-bg);
+    color: var(--pd-tab-fg);
     border-radius: 10px;
-    padding: 12px 14px;
+    padding: 20px;
     font-weight: 600;
     line-height: 1.2;
     cursor: pointer;
     text-align: center;
-    transition: all 0.2s ease;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+      filter 0.25s ease;
+
+    &:hover {
+      background-color: var(--pd-tab-bg);
+      color: var(--pd-tab-fg);
+      filter: brightness(0.98);
+    }
 
     &.is-active,
     &[aria-selected="true"] {
-      background: #053B3F;
-      color: #ffffff;
-      border-color: transparent;
+      border-color: currentColor;
+      filter: none;
     }
-    
-    &:not(.is-active):not([aria-selected="true"]) {
-      background: #EBF2F2;
-      color: #053B3F;
-      border-color: rgba(5, 59, 63, 0.15);
-    }
+  }
+
+  // Per-tab colors
+  .packages-details__tab--0 {
+    --pd-tab-bg: #ebf2f2;
+    --pd-tab-fg: #053b3f;
+  }
+
+  .packages-details__tab--1 {
+    --pd-tab-bg: #053b3f;
+    --pd-tab-fg: #ffffff;
+  }
+
+  .packages-details__tab--2 {
+    --pd-tab-bg: #fed36e;
+    --pd-tab-fg: #053b3f;
   }
 
   .packages-details__table {
@@ -115,8 +133,37 @@
     color: #053B3F;
     cursor: pointer;
     user-select: none;
+    position: relative;
+    padding-right: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      width: 16px;
+      height: 16px;
+      transform: translateY(-50%);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 16px 16px;
+      background-image: var(--pd-arrow-open);
+      opacity: 0.75;
+    }
+
+    &[aria-expanded="false"]::after {
+      background-image: var(--pd-arrow-closed);
+    }
 
     &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
       outline: 2px solid rgba(5, 59, 63, 0.25);
       outline-offset: 2px;
     }
@@ -141,6 +188,91 @@
 
   .packages-details__items {
     background: #ffffff;
+  }
+
+  // Column background colors when the first tab is active (Essential)
+  .packages-details.is-active-0 {
+    // Section title column + first package column
+    .packages-details__section-title,
+    .packages-details__items[data-col="0"] {
+      background: #ebf2f2;
+    }
+
+    // Second package column
+    .packages-details__items[data-col="1"] {
+      background: #053b3f;
+
+      .packages-details__list-item,
+      .packages-details__text {
+        color: #ffffff;
+      }
+
+      .packages-details__check {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    // Third package column
+    .packages-details__items[data-col="2"] {
+      background: #fed36f;
+    }
+  }
+
+  // When the second tab is active (Comprehensive): only the left section column changes
+  .packages-details.is-active-1 {
+    .packages-details__section-title {
+      background: #053b3f;
+      color: #ffffff;
+    }
+
+    .packages-details__section-title::after {
+      filter: brightness(0) invert(1);
+      opacity: 1;
+    }
+
+    // Keep other columns the same
+    .packages-details__items[data-col="1"] {
+      background: #053b3f;
+
+      .packages-details__list-item,
+      .packages-details__text {
+        color: #ffffff;
+      }
+
+      .packages-details__check {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    .packages-details__items[data-col="2"] {
+      background: #fed36f;
+    }
+  }
+
+  // When the third tab is active (Advanced): col=0 becomes yellow; keep others like Comprehensive
+  .packages-details.is-active-2 {
+    // Only the left section column changes (Medical Examinations, etc.)
+    .packages-details__section-title {
+      background: #fed36f;
+      color: #053b3f;
+    }
+
+    .packages-details__items[data-col="1"] {
+      background: #053b3f;
+
+      .packages-details__list-item,
+      .packages-details__text {
+        color: #ffffff;
+      }
+
+      .packages-details__check {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    .packages-details__items[data-col="2"] {
+      background: #fed36f;
+    }
   }
 
   .packages-details__list {
@@ -201,12 +333,44 @@
     .packages-details__accordion-summary {
       cursor: pointer;
       padding: 16px;
+      padding-right: 44px;
       font-weight: 700;
       color: #053B3F;
       list-style: none;
+      position: relative;
 
       &::-webkit-details-marker {
         display: none;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid rgba(5, 59, 63, 0.25);
+        outline-offset: 2px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 14px;
+        width: 16px;
+        height: 16px;
+        transform: translateY(-50%);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px 16px;
+        background-image: var(--pd-arrow-closed);
+        opacity: 0.75;
+      }
+    }
+
+    .packages-details__accordion-item[open] {
+      .packages-details__accordion-summary::after {
+        background-image: var(--pd-arrow-open);
       }
     }
 

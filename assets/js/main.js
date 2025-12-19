@@ -66,12 +66,27 @@ import '../scss/main.scss';
         });
       };
 
+      const initDesktopRows = ($root) => {
+        const $rows = $root.find('.packages-details__grid-row[data-pd-row]');
+        if (!$rows.length) return;
+        $rows.each(function(i) {
+          const $row = $(this);
+          const $toggle = $row.find('[data-pd-row-toggle]').first();
+          const shouldOpen = i < 2;
+          $row.toggleClass('is-collapsed', !shouldOpen);
+          if ($toggle.length) {
+            $toggle.attr('aria-expanded', shouldOpen ? 'true' : 'false');
+          }
+        });
+      };
+
       // Init each module
       $('[data-packages-details]').each(function() {
         const $root = $(this);
         const $first = $root.find('.packages-details__tab').first();
         const initIdx = $first.length ? Number($first.data('index')) : 0;
         setActive($root, Number.isNaN(initIdx) ? 0 : initIdx);
+        initDesktopRows($root);
       });
 
       // Click handler
@@ -82,26 +97,48 @@ import '../scss/main.scss';
         setActive($root, $btn.data('index'));
       });
 
-      const toggleRow = ($toggle) => {
+      const toggleRow = ($root, $toggle) => {
         const $row = $toggle.closest('.packages-details__grid-row');
         if (!$row.length) return;
-        const isCollapsed = $row.hasClass('is-collapsed');
-        $row.toggleClass('is-collapsed', !isCollapsed);
-        $toggle.attr('aria-expanded', isCollapsed ? 'true' : 'false');
+        const willOpen = $row.hasClass('is-collapsed');
+
+        if (willOpen) {
+          // Close all others (accordion behavior)
+          $root.find('.packages-details__grid-row[data-pd-row]').each(function() {
+            const $r = $(this);
+            const $t = $r.find('[data-pd-row-toggle]').first();
+            $r.addClass('is-collapsed');
+            if ($t.length) $t.attr('aria-expanded', 'false');
+          });
+
+          // Open current
+          $row.removeClass('is-collapsed');
+          $toggle.attr('aria-expanded', 'true');
+        } else {
+          // Allow closing the current row
+          $row.addClass('is-collapsed');
+          $toggle.attr('aria-expanded', 'false');
+        }
       };
 
       // Desktop: collapse/expand section rows (accordion-like)
       $(document).on('click', '[data-packages-details] .packages-details__section-title[data-pd-row-toggle]', function(e) {
         // Avoid interfering with any nested interactive elements (if introduced later)
         if ($(e.target).closest('a, button, input, select, textarea').length) return;
-        toggleRow($(this));
+        const $toggle = $(this);
+        const $root = $toggle.closest('[data-packages-details]');
+        if (!$root.length) return;
+        toggleRow($root, $toggle);
       });
 
       $(document).on('keydown', '[data-packages-details] .packages-details__section-title[data-pd-row-toggle]', function(e) {
         const key = e.key || e.keyCode;
         if (key === 'Enter' || key === ' ' || key === 13 || key === 32) {
           e.preventDefault();
-          toggleRow($(this));
+          const $toggle = $(this);
+          const $root = $toggle.closest('[data-packages-details]');
+          if (!$root.length) return;
+          toggleRow($root, $toggle);
         }
       });
     },

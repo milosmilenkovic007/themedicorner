@@ -1,6 +1,16 @@
 .module-packages-details {
   padding: 80px 0;
 
+  @keyframes pd-diff-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.06);
+    }
+  }
+
   .packages-details__inner {
     width: 100%;
     max-width: 1200px;
@@ -75,6 +85,7 @@
       background-color: var(--pd-tab-bg);
       color: var(--pd-tab-fg);
       border: 1px solid currentColor;
+      font-weight: 700;
       filter: none;
     }
   }
@@ -206,12 +217,52 @@
     background: #ebf2f2;
   }
 
+  // Biochemistry Laboratory: last two columns can have many items.
+  // Show ~10 items and let the rest scroll (scrollbar hidden).
+  .packages-details__grid-row[data-pd-section="biochemistry-laboratory"] {
+    .packages-details__items[data-col="0"] .packages-details__list,
+    .packages-details__items[data-col="1"] .packages-details__list,
+    .packages-details__items[data-col="2"] .packages-details__list {
+      max-height: 320px;
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: none; // Firefox
+      -ms-overflow-style: none; // IE/Edge legacy
+
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+
+  // When "Show all" is enabled: Biochemistry shows all items (no scroll)
+  .packages-details.pd-show-all {
+    .packages-details__grid-row[data-pd-section="biochemistry-laboratory"] {
+      .packages-details__items[data-col="0"] .packages-details__list,
+      .packages-details__items[data-col="1"] .packages-details__list,
+      .packages-details__items[data-col="2"] .packages-details__list {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+      }
+    }
+  }
+
   // Column background colors when the first tab is active (Essential)
   .packages-details.is-active-0 {
     // Section title column + first package column
     .packages-details__section-title,
     .packages-details__items[data-col="0"] {
       background: #ebf2f2;
+    }
+
+    // Active package column: bolder text
+    .packages-details__items[data-col="0"] {
+      .packages-details__list-item,
+      .packages-details__text {
+        font-weight: 600;
+      }
     }
 
     // Second package column
@@ -253,6 +304,7 @@
       .packages-details__list-item,
       .packages-details__text {
         color: #ffffff;
+        font-weight: 600;
       }
 
       .packages-details__check {
@@ -288,6 +340,11 @@
 
     .packages-details__items[data-col="2"] {
       background: #fed36f;
+
+      .packages-details__list-item,
+      .packages-details__text {
+        font-weight: 600;
+      }
     }
   }
 
@@ -308,11 +365,64 @@
     line-height: 1.45;
   }
 
+  // Ensure diff size pulse only affects text (not the check icon)
+  .packages-details__list-item.pd-diff .packages-details__text {
+    display: inline-block;
+    transform-origin: left center;
+  }
+
+  .packages-details__list-item--empty {
+    visibility: hidden;
+    min-height: 20px;
+  }
+
+  // Diff emphasis (relative comparisons)
+  .packages-details.is-active-1 {
+    .packages-details__items[data-col="1"] .packages-details__list-item.pd-diff .packages-details__text,
+    .packages-details__accordion-panel[data-col="1"] .packages-details__list-item.pd-diff .packages-details__text {
+      font-size: 15px;
+      animation: pd-diff-pulse 2.2s ease-in-out infinite;
+      will-change: transform;
+    }
+  }
+
+  .packages-details.is-active-2 {
+    .packages-details__items[data-col="2"] .packages-details__list-item.pd-diff .packages-details__text,
+    .packages-details__accordion-panel[data-col="2"] .packages-details__list-item.pd-diff .packages-details__text {
+      font-size: 15px;
+      animation: pd-diff-pulse 2.2s ease-in-out infinite;
+      will-change: transform;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .packages-details__list-item.pd-diff .packages-details__text {
+      animation: none !important;
+    }
+  }
+
   .packages-details__check {
     width: 16px;
     height: 16px;
     flex: 0 0 16px;
     margin-top: 2px;
+  }
+
+  .packages-details__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .packages-details__toggle-all {
+    appearance: none;
+    background: transparent;
+    border: 1px solid rgba(5, 59, 63, 0.25);
+    color: #053b3f;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 600;
+    cursor: pointer;
   }
 
   @include max-width($breakpoint-md) {
@@ -402,10 +512,44 @@
       display: none;
     }
 
+    details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"] {
+      .packages-details__accordion-panel[data-col="0"] .packages-details__list,
+      .packages-details__accordion-panel[data-col="1"] .packages-details__list,
+      .packages-details__accordion-panel[data-col="2"] .packages-details__list {
+        max-height: 320px;
+        overflow-y: auto;
+        padding-right: 6px;
+        scrollbar-width: none; // Firefox
+        -ms-overflow-style: none; // IE/Edge legacy
+
+        &::-webkit-scrollbar {
+          width: 0;
+          height: 0;
+        }
+      }
+    }
+
+    .packages-details.pd-show-all {
+      details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"] {
+        .packages-details__accordion-panel[data-col="0"] .packages-details__list,
+        .packages-details__accordion-panel[data-col="1"] .packages-details__list,
+        .packages-details__accordion-panel[data-col="2"] .packages-details__list {
+          max-height: none;
+          overflow: visible;
+          padding-right: 0;
+        }
+      }
+    }
+
     @for $i from 0 through 7 {
       .packages-details.is-active-#{$i} {
         .packages-details__accordion-panel[data-col="#{$i}"] {
           display: block;
+
+          .packages-details__list-item,
+          .packages-details__text {
+            font-weight: 600;
+          }
         }
       }
     }

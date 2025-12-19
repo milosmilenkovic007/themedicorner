@@ -228,7 +228,7 @@ if ( $pkg_count === 0 ) {
                             $line1 = (string) ( $sec['title_line_1'] ?? '' );
                             $line2 = (string) ( $sec['title_line_2'] ?? '' );
                         ?>
-                        <div class="packages-details__grid-row" data-pd-row data-pd-row-index="<?php echo esc_attr( (string) $sec_idx ); ?>">
+                        <div class="packages-details__grid-row" data-pd-row data-pd-row-index="<?php echo esc_attr( (string) $sec_idx ); ?>" data-pd-section="<?php echo esc_attr( (string) $sec_key ); ?>">
                             <div
                                 class="packages-details__cell packages-details__section-title"
                                 role="button"
@@ -274,7 +274,7 @@ if ( $pkg_count === 0 ) {
                         // Open first 2 sections by default
                         $is_open = $sec_idx < 2;
                     ?>
-                    <details class="packages-details__accordion-item"<?php echo $is_open ? ' open' : ''; ?>>
+                    <details class="packages-details__accordion-item" data-pd-section="<?php echo esc_attr( (string) $sec_key ); ?>"<?php echo $is_open ? ' open' : ''; ?>>
                         <summary class="packages-details__accordion-summary">
                             <?php if ( $line1 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line1 ); ?></span><?php endif; ?>
                             <?php if ( $line2 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line2 ); ?></span><?php endif; ?>
@@ -301,6 +301,10 @@ if ( $pkg_count === 0 ) {
                         </div>
                     </details>
                 <?php endforeach; ?>
+            </div>
+
+            <div class="packages-details__footer">
+                <button type="button" class="packages-details__toggle-all" data-pd-toggle-all>Show all</button>
             </div>
         </div>
     </div>

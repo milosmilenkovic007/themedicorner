@@ -66,6 +66,190 @@ import '../scss/main.scss';
         });
       };
 
+      const normalizeItemText = (text) => {
+        return String(text || '')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .toLowerCase();
+      };
+
+      const markDiffItems = ($root) => {
+        const maxCols = Number($root.data('count'));
+        if (!maxCols || Number.isNaN(maxCols)) return;
+
+        const markInRow = ($row, panelSelector) => {
+          // Remove any previous markings
+          $row.find(`${panelSelector} .packages-details__list-item`).removeClass('pd-diff');
+
+          for (let col = 1; col < maxCols; col += 1) {
+            const $prevPanel = $row.find(`${panelSelector}[data-col="${col - 1}"]`).first();
+            const $curPanel = $row.find(`${panelSelector}[data-col="${col}"]`).first();
+            if (!$curPanel.length) continue;
+
+            const prevSet = new Set();
+            if ($prevPanel.length) {
+              $prevPanel.find('.packages-details__list-item').each(function() {
+                const $li = $(this);
+                if ($li.hasClass('packages-details__list-item--empty')) return;
+                const t = normalizeItemText($li.find('.packages-details__text').text());
+                if (t) prevSet.add(t);
+              });
+            }
+
+            $curPanel.find('.packages-details__list-item').each(function() {
+              const $li = $(this);
+              if ($li.hasClass('packages-details__list-item--empty')) return;
+              const t = normalizeItemText($li.find('.packages-details__text').text());
+              if (!t) return;
+              if (!prevSet.has(t)) {
+                $li.addClass('pd-diff');
+              }
+            });
+          }
+        };
+
+        // Desktop table rows
+        $root.find('.packages-details__grid-row[data-pd-row]').each(function() {
+          markInRow($(this), '.packages-details__items');
+        });
+
+        // Mobile accordion details
+        $root.find('details.packages-details__accordion-item').each(function() {
+          markInRow($(this), '.packages-details__accordion-panel');
+        });
+      };
+
+      const setupBiochemSyncedScroll = ($root) => {
+        const $row = $root
+          .find('.packages-details__grid-row[data-pd-section="biochemistry-laboratory"]')
+          .first();
+        if (!$row.length) return;
+
+        const $lists = $row.find(
+          '.packages-details__items[data-col="0"] .packages-details__list, ' +
+          '.packages-details__items[data-col="1"] .packages-details__list, ' +
+          '.packages-details__items[data-col="2"] .packages-details__list'
+        );
+
+        if ($lists.length < 2) return;
+
+        // Normalize heights: pad shorter columns with invisible placeholders
+        // so all columns scroll the same distance.
+        const counts = [];
+        $lists.each(function() {
+          const $list = $(this);
+          $list.find('.packages-details__list-item--empty').remove();
+          counts.push($list.find('.packages-details__list-item').length);
+        });
+
+        const maxCount = Math.max.apply(null, counts);
+        if (maxCount > 0) {
+          $lists.each(function(i) {
+            const $list = $(this);
+            const missing = maxCount - counts[i];
+            if (missing > 0) {
+              const empties = new Array(missing)
+                .fill('<li class="packages-details__list-item packages-details__list-item--empty" aria-hidden="true"></li>')
+                .join('');
+              $list.append(empties);
+            }
+          });
+        }
+
+        // Avoid stacking handlers across tab switches / re-inits
+        $lists.off('scroll.pdBiochem');
+
+        let syncing = false;
+        $lists.on('scroll.pdBiochem', function(e) {
+          if (syncing) return;
+          syncing = true;
+          const top = this.scrollTop;
+          $lists.each(function() {
+            if (this !== e.currentTarget) {
+              this.scrollTop = top;
+            }
+          });
+          syncing = false;
+        });
+      };
+
+      const resetBiochemScroll = ($root) => {
+        // Desktop lists
+        $root
+          .find(
+            '.packages-details__grid-row[data-pd-section="biochemistry-laboratory"] ' +
+              '.packages-details__items[data-col="0"] .packages-details__list, ' +
+              '.packages-details__grid-row[data-pd-section="biochemistry-laboratory"] ' +
+              '.packages-details__items[data-col="1"] .packages-details__list, ' +
+              '.packages-details__grid-row[data-pd-section="biochemistry-laboratory"] ' +
+              '.packages-details__items[data-col="2"] .packages-details__list'
+          )
+          .each(function() {
+            this.scrollTop = 0;
+          });
+
+        // Mobile lists
+        $root
+          .find(
+            'details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"] ' +
+              '.packages-details__accordion-panel[data-col="0"] .packages-details__list, ' +
+              'details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"] ' +
+              '.packages-details__accordion-panel[data-col="1"] .packages-details__list, ' +
+              'details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"] ' +
+              '.packages-details__accordion-panel[data-col="2"] .packages-details__list'
+          )
+          .each(function() {
+            this.scrollTop = 0;
+          });
+      };
+
+      const updateToggleAllLabel = ($root) => {
+        const $btn = $root.find('[data-pd-toggle-all]').first();
+        if (!$btn.length) return;
+
+        const $rows = $root.find('.packages-details__grid-row[data-pd-row]');
+        const $details = $root.find('details.packages-details__accordion-item');
+
+        const allOpenDesktop = $rows.length ? $rows.filter('.is-collapsed').length === 0 : true;
+        const allOpenMobile = $details.length ? $details.filter(':not([open])').length === 0 : true;
+        const allOpen = allOpenDesktop && allOpenMobile;
+
+        $btn.text(allOpen ? 'Close all' : 'Show all');
+        $btn.attr('data-state', allOpen ? 'open' : 'closed');
+      };
+
+      const openAllSections = ($root) => {
+        $root.addClass('pd-show-all');
+        // Desktop
+        $root.find('.packages-details__grid-row[data-pd-row]').each(function() {
+          const $row = $(this);
+          $row.removeClass('is-collapsed');
+          const $toggle = $row.find('[data-pd-row-toggle]').first();
+          if ($toggle.length) $toggle.attr('aria-expanded', 'true');
+        });
+
+        // Mobile
+        $root.find('details.packages-details__accordion-item').each(function() {
+          $(this).attr('open', 'open');
+        });
+      };
+
+      const closeAllSections = ($root) => {
+        $root.removeClass('pd-show-all');
+        // Desktop
+        $root.find('.packages-details__grid-row[data-pd-row]').each(function() {
+          const $row = $(this);
+          $row.addClass('is-collapsed');
+          const $toggle = $row.find('[data-pd-row-toggle]').first();
+          if ($toggle.length) $toggle.attr('aria-expanded', 'false');
+        });
+
+        // Mobile
+        $root.find('details.packages-details__accordion-item').each(function() {
+          $(this).removeAttr('open');
+        });
+      };
+
       const resetSectionsState = ($root) => {
         // Desktop rows
         const $rows = $root.find('.packages-details__grid-row[data-pd-row]');
@@ -101,6 +285,10 @@ import '../scss/main.scss';
         const initIdx = $first.length ? Number($first.data('index')) : 0;
         setActive($root, Number.isNaN(initIdx) ? 0 : initIdx);
         resetSectionsState($root);
+        setupBiochemSyncedScroll($root);
+        resetBiochemScroll($root);
+        updateToggleAllLabel($root);
+        markDiffItems($root);
       });
 
       // Click handler
@@ -110,6 +298,32 @@ import '../scss/main.scss';
         if (!$root.length) return;
         setActive($root, $btn.data('index'));
         resetSectionsState($root);
+        setupBiochemSyncedScroll($root);
+        resetBiochemScroll($root);
+        updateToggleAllLabel($root);
+        markDiffItems($root);
+      });
+
+      // Show all / Close all
+      $(document).on('click', '[data-packages-details] [data-pd-toggle-all]', function() {
+        const $btn = $(this);
+        const $root = $btn.closest('[data-packages-details]');
+        if (!$root.length) return;
+
+        const state = ($btn.attr('data-state') || 'closed').toLowerCase();
+        const shouldClose = state === 'open';
+
+        if (shouldClose) {
+          closeAllSections($root);
+        } else {
+          openAllSections($root);
+        }
+
+        // Keep Biochemistry behavior consistent when bulk-toggling.
+        setupBiochemSyncedScroll($root);
+        resetBiochemScroll($root);
+
+        updateToggleAllLabel($root);
       });
 
       const toggleRow = ($root, $toggle) => {
@@ -144,6 +358,15 @@ import '../scss/main.scss';
         const $root = $toggle.closest('[data-packages-details]');
         if (!$root.length) return;
         toggleRow($root, $toggle);
+
+        const $row = $toggle.closest('.packages-details__grid-row');
+        if (
+          $row.length &&
+          $row.attr('data-pd-section') === 'biochemistry-laboratory' &&
+          !$row.hasClass('is-collapsed')
+        ) {
+          resetBiochemScroll($root);
+        }
       });
 
       $(document).on('keydown', '[data-packages-details] .packages-details__section-title[data-pd-row-toggle]', function(e) {
@@ -154,8 +377,29 @@ import '../scss/main.scss';
           const $root = $toggle.closest('[data-packages-details]');
           if (!$root.length) return;
           toggleRow($root, $toggle);
+
+          const $row = $toggle.closest('.packages-details__grid-row');
+          if (
+            $row.length &&
+            $row.attr('data-pd-section') === 'biochemistry-laboratory' &&
+            !$row.hasClass('is-collapsed')
+          ) {
+            resetBiochemScroll($root);
+          }
         }
       });
+
+      // Mobile: when Biochemistry <details> opens, reset list scroll position.
+      $(document).on(
+        'toggle',
+        'details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"]',
+        function() {
+          if (!this.open) return;
+          const $root = $(this).closest('[data-packages-details]');
+          if (!$root.length) return;
+          resetBiochemScroll($root);
+        }
+      );
     },
 
     initializeCarousels() {

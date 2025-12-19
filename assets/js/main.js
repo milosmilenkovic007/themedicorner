@@ -15,6 +15,7 @@ import '../scss/main.scss';
       // Initialize components
       this.initializeModals();
       this.initializeAccordions();
+      this.initializePackagesDetails();
       this.initializeCarousels();
       this.initializeScrollAnimations();
     },
@@ -43,6 +44,42 @@ import '../scss/main.scss';
         if (!isActive) {
           item.addClass('active');
         }
+      });
+    },
+
+    initializePackagesDetails() {
+      const setActive = ($root, index) => {
+        const idx = Number(index);
+        if (Number.isNaN(idx)) return;
+
+        // Remove previous is-active-* classes
+        const classes = ($root.attr('class') || '').split(/\s+/);
+        const next = classes.filter(c => !/^is-active-\d+$/.test(c));
+        next.push(`is-active-${idx}`);
+        $root.attr('class', next.join(' '));
+
+        $root.find('.packages-details__tab').each(function() {
+          const $btn = $(this);
+          const isCurrent = Number($btn.data('index')) === idx;
+          $btn.toggleClass('is-active', isCurrent);
+          $btn.attr('aria-selected', isCurrent ? 'true' : 'false');
+        });
+      };
+
+      // Init each module
+      $('[data-packages-details]').each(function() {
+        const $root = $(this);
+        const $first = $root.find('.packages-details__tab').first();
+        const initIdx = $first.length ? Number($first.data('index')) : 0;
+        setActive($root, Number.isNaN(initIdx) ? 0 : initIdx);
+      });
+
+      // Click handler
+      $(document).on('click', '.packages-details__tab', function() {
+        const $btn = $(this);
+        const $root = $btn.closest('[data-packages-details]');
+        if (!$root.length) return;
+        setActive($root, $btn.data('index'));
       });
     },
 

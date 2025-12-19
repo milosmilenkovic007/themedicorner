@@ -1,0 +1,34 @@
+{
+  "use_acf_template": 1,
+  "page_modules": [
+    {
+      "acf_fc_layout": "hero-section",
+      "title": "Our Check-up Packages",
+      "subtitle": "Choose the package that fits you best.",
+      "background_image": null,
+      "height": "large",
+      "button_text": "Get a free consultation",
+      "button_link": "#",
+      "bg_color": "#EBF2F2"
+    },
+    {
+      "acf_fc_layout": "packages-showcase",
+      "background_color": "#053B3F",
+      "title": "Packages",
+      "packages": [
+        {
+          "image": null,
+          "image_position": "left",
+          "heading": "Essential Diagnostic Package",
+          "description": "Short description goes here.",
+          "items": [
+            { "icon": null, "icon_color": "#FED574", "text": "Internal Medicine" },
+            { "icon": null, "icon_color": "#FED574", "text": "Cardiology" }
+          ],
+          "button_primary": { "title": "Get a free consultation", "url": "#", "target": "" },
+          "button_secondary": { "title": "Full overview", "url": "#", "target": "" }
+        }
+      ]
+    }
+  ]
+}

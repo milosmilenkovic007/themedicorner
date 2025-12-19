@@ -107,13 +107,13 @@ function hello_child_register_acf_field_groups() {
                                 'label' => 'Button Link',
                                 'name' => 'button_link',
                                 'type' => 'url',
-                                                        array(
-                                                            'key' => 'field_hero_bg_color',
-                                                            'label' => 'Content Background Color',
-                                                            'name' => 'bg_color',
-                                                            'type' => 'color',
-                                                            'default_value' => '#EBF2F2',
-                                                        ),
+                            ),
+                            array(
+                                'key' => 'field_hero_bg_color',
+                                'label' => 'Content Background Color',
+                                'name' => 'bg_color',
+                                'type' => 'color_picker',
+                                'default_value' => '#EBF2F2',
                             ),
                         ),
                     ),
@@ -243,44 +243,31 @@ function hello_child_register_acf_field_groups() {
                         'display' => 'block',
                         'sub_fields' => array(
                             array(
-                                'key' => 'field_details_title',
-                                'label' => 'Section Title',
-                                'name' => 'title',
+                                'key' => 'field_details_heading',
+                                'label' => 'Heading',
+                                'name' => 'heading',
                                 'type' => 'text',
+                                'instructions' => 'Center aligned block heading',
                             ),
                             array(
-                                'key' => 'field_details_accordions',
-                                'label' => 'Accordion Sections',
-                                'name' => 'accordions',
-                                'type' => 'repeater',
-                                'button_label' => 'Add Accordion',
-                                'layout' => 'block',
-                                'sub_fields' => array(
-                                    array(
-                                        'key' => 'field_accordion_title',
-                                        'label' => 'Title',
-                                        'name' => 'title',
-                                        'type' => 'text',
-                                        'required' => 1,
-                                    ),
-                                    array(
-                                        'key' => 'field_accordion_items',
-                                        'label' => 'Items',
-                                        'name' => 'items',
-                                        'type' => 'repeater',
-                                        'button_label' => 'Add Item',
-                                        'layout' => 'block',
-                                        'sub_fields' => array(
-                                            array(
-                                                'key' => 'field_item_text',
-                                                'label' => 'Text',
-                                                'name' => 'text',
-                                                'type' => 'text',
-                                                'required' => 1,
-                                            ),
-                                        ),
-                                    ),
-                                ),
+                                'key' => 'field_details_description',
+                                'label' => 'Description',
+                                'name' => 'description',
+                                'type' => 'textarea',
+                                'rows' => 3,
+                                'instructions' => 'Center aligned subheading/description text',
+                            ),
+                            array(
+                                'key' => 'field_details_packages',
+                                'label' => 'Select Packages',
+                                'name' => 'packages',
+                                'type' => 'relationship',
+                                'post_type' => array( 'package' ),
+                                'filters' => array( 'search', 'taxonomy' ),
+                                'elements' => array( 'featured_image' ),
+                                'return_format' => 'id',
+                                'min' => 1,
+                                'instructions' => 'Select which Packages (CPT) to compare. Drag & drop to reorder.',
                             ),
                         ),
                     ),
@@ -397,6 +384,139 @@ function hello_child_register_acf_field_groups() {
         'active' => true,
         'description' => 'Flexible content page modules',
     ) );
+
+    // Packages CPT Fields
+    acf_add_local_field_group( array(
+        'key' => 'group_packages_cpt_fields',
+        'title' => 'Package Details',
+        'fields' => array(
+            array(
+                'key' => 'field_package_price',
+                'label' => 'Price',
+                'name' => 'price',
+                'type' => 'number',
+                'required' => 1,
+                'min' => 0,
+                'step' => 0.01,
+                'prepend' => '€',
+            ),
+            array(
+                'key' => 'field_package_short_description',
+                'label' => 'Short Description',
+                'name' => 'short_description',
+                'type' => 'textarea',
+                'rows' => 3,
+                'instructions' => 'Optional: short summary used in listings/cards. Full description can be written in the main editor above.',
+            ),
+            array(
+                'key' => 'field_package_include_sections',
+                'label' => 'Include Sections',
+                'name' => 'include_sections',
+                'type' => 'repeater',
+                'layout' => 'block',
+                'button_label' => 'Add Section',
+                'collapsed' => 'field_package_section_title_line_1',
+                'sub_fields' => array(
+                    array(
+                        'key' => 'field_package_section_title_line_1',
+                        'label' => 'Title (Line 1)',
+                        'name' => 'title_line_1',
+                        'type' => 'text',
+                        'required' => 1,
+                        'wrapper' => array( 'width' => '50' ),
+                    ),
+                    array(
+                        'key' => 'field_package_section_title_line_2',
+                        'label' => 'Title (Line 2)',
+                        'name' => 'title_line_2',
+                        'type' => 'text',
+                        'required' => 0,
+                        'wrapper' => array( 'width' => '50' ),
+                    ),
+                    array(
+                        'key' => 'field_package_section_items',
+                        'label' => 'Items',
+                        'name' => 'items',
+                        'type' => 'repeater',
+                        'layout' => 'table',
+                        'button_label' => 'Add Item',
+                        'sub_fields' => array(
+                            array(
+                                'key' => 'field_package_section_item_text',
+                                'label' => 'Item',
+                                'name' => 'text',
+                                'type' => 'text',
+                                'required' => 1,
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'package',
+                ),
+            ),
+        ),
+        'position' => 'normal',
+        'style' => 'default',
+        'active' => true,
+    ) );
 }
+
+/**
+ * Seed default include sections on new Packages (auto-draft) so the editor starts
+ * with the 4 required sections, while still allowing adding more.
+ */
+add_filter( 'acf/load_value/name=include_sections', function( $value, $post_id, $field ) {
+    if ( ! empty( $value ) ) {
+        return $value;
+    }
+
+    if ( ! is_admin() ) {
+        return $value;
+    }
+
+    $post_id_int = is_numeric( $post_id ) ? intval( $post_id ) : 0;
+    if ( ! $post_id_int ) {
+        return $value;
+    }
+
+    if ( get_post_type( $post_id_int ) !== 'package' ) {
+        return $value;
+    }
+
+    // Only seed on the initial auto-draft creation.
+    if ( get_post_status( $post_id_int ) !== 'auto-draft' ) {
+        return $value;
+    }
+
+    return array(
+        array(
+            'title_line_1' => 'Medical',
+            'title_line_2' => 'Examinations',
+            'items' => array(),
+        ),
+        array(
+            'title_line_1' => 'Cardiology',
+            'title_line_2' => 'Laboratory',
+            'items' => array(),
+        ),
+        array(
+            'title_line_1' => 'Radiology & Functional Tests',
+            'title_line_2' => '',
+            'items' => array(),
+        ),
+        array(
+            'title_line_1' => 'Biochemistry',
+            'title_line_2' => 'Laboratory',
+            'items' => array(),
+        ),
+    );
+}, 10, 3 );
 
 add_action( 'acf/init', 'hello_child_register_acf_field_groups' );

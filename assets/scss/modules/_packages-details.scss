@@ -1,32 +1,198 @@
 .module-packages-details {
   padding: 80px 0;
-  .packages-details__title {
+
+  .packages-details__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .packages-details__heading {
     text-align: center;
-    margin-bottom: 32px;
+    margin: 0 0 10px;
   }
-  .packages-details__accordions {
+
+  .packages-details__subheading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 34px;
+    color: rgba(5, 59, 63, 0.8);
+  }
+
+  .packages-details {
+    width: 100%;
+  }
+
+  .packages-details__tabs {
     display: grid;
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 0 0 18px;
   }
+
+  .packages-details__tab {
+    appearance: none;
+    border: 1px solid rgba(5, 59, 63, 0.15);
+    background: #EBF2F2;
+    color: #053B3F;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    text-align: center;
+
+    &.is-active,
+    &[aria-selected="true"] {
+      background: #053B3F;
+      color: #ffffff;
+      border-color: transparent;
+    }
+  }
+
+  .packages-details__table {
+    display: block;
+  }
+
   .packages-details__accordion {
-    border: 1px solid #c1cecf;
-    border-radius: 12px;
-    padding: 0 16px;
-    summary {
-      cursor: pointer;
-      padding: 18px 0;
-      font-weight: 600;
-      list-style: none;
-      &::-webkit-details-marker { display: none; }
+    display: none;
+  }
+
+  .packages-details__grid {
+    width: 100%;
+    border: 1px solid rgba(5, 59, 63, 0.12);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .packages-details__grid-row {
+    display: grid;
+    grid-template-columns: 220px repeat(var(--pkg-cols), minmax(0, 1fr));
+    border-top: 1px solid rgba(5, 59, 63, 0.12);
+
+    &:first-child {
+      border-top: none;
     }
-    .packages-details__accordion-content {
-      padding: 0 0 16px;
+  }
+
+  .packages-details__cell {
+    padding: 18px 16px;
+    border-left: 1px solid rgba(5, 59, 63, 0.12);
+
+    &:first-child {
+      border-left: none;
     }
-    .packages-details__items-list {
-      margin: 0;
-      padding-left: 18px;
+  }
+
+  .packages-details__grid-row--head {
+    background: #ffffff;
+  }
+
+  .packages-details__corner {
+    background: #ffffff;
+  }
+
+  .packages-details__col-head {
+    text-align: center;
+    font-weight: 700;
+    color: #053B3F;
+  }
+
+  .packages-details__section-title {
+    font-weight: 700;
+    color: #053B3F;
+  }
+
+  .packages-details__section-line {
+    display: block;
+  }
+
+  .packages-details__items {
+    background: #ffffff;
+  }
+
+  .packages-details__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .packages-details__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(5, 59, 63, 0.9);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .packages-details__check {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    margin-top: 2px;
+  }
+
+  @include max-width($breakpoint-md) {
+    .packages-details__table {
+      display: none;
+    }
+
+    .packages-details__accordion {
       display: grid;
-      gap: 6px;
+      gap: 10px;
+    }
+
+    .packages-details__tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .packages-details__tab {
+      flex: 0 0 auto;
+      min-width: 220px;
+      white-space: nowrap;
+    }
+
+    .packages-details__accordion-item {
+      border: 1px solid rgba(5, 59, 63, 0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .packages-details__accordion-summary {
+      cursor: pointer;
+      padding: 16px;
+      font-weight: 700;
+      color: #053B3F;
+      list-style: none;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    .packages-details__accordion-content {
+      padding: 0 16px 16px;
+    }
+
+    .packages-details__accordion-panel {
+      display: none;
+    }
+
+    @for $i from 0 through 7 {
+      .packages-details.is-active-#{$i} {
+        .packages-details__accordion-panel[data-col="#{$i}"] {
+          display: block;
+        }
+      }
     }
   }
 }

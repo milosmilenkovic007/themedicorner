@@ -1,0 +1,20 @@
+{
+  "acf_fc_layout": "packages-showcase",
+  "background_color": "#053B3F",
+  "title": "Packages",
+  "packages": [
+    {
+      "image": null,
+      "image_position": "left",
+      "heading": "Essential Diagnostic Package",
+      "description": "Short description goes here.",
+      "items": [
+        { "icon": null, "icon_color": "#FED574", "text": "Internal Medicine" },
+        { "icon": null, "icon_color": "#FED574", "text": "Cardiology" },
+        { "icon": null, "icon_color": "#FED574", "text": "Pulmonology" }
+      ],
+      "button_primary": { "title": "Get a free consultation", "url": "#", "target": "" },
+      "button_secondary": { "title": "Full overview", "url": "#", "target": "" }
+    }
+  ]
+}

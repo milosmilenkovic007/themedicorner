@@ -1,0 +1,155 @@
+{
+    "key": "group_page_modules",
+    "title": "Page Modules",
+    "fields": [
+        {
+            "key": "field_page_modules",
+            "label": "Modules",
+            "name": "page_modules",
+            "aria-label": "",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_hero_section": {
+                    "key": "layout_hero_section",
+                    "name": "hero-section",
+                    "label": "Hero Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_hero_title", "label": "Title", "name": "title", "type": "text", "required": 1},
+                        {"key": "field_hero_subtitle", "label": "Subtitle", "name": "subtitle", "type": "textarea", "rows": 3},
+                        {"key": "field_hero_image", "label": "Background Image", "name": "background_image", "type": "image", "return_format": "array"},
+                        {"key": "field_hero_height", "label": "Hero Height", "name": "height", "type": "select", "choices": {"auto": "Auto", "small": "Small (400px)", "medium": "Medium (600px)", "large": "Large (800px)", "full": "Full Screen"}, "default_value": "large"},
+                        {"key": "field_hero_button_text", "label": "Button Text", "name": "button_text", "type": "text"},
+                        {"key": "field_hero_button_link", "label": "Button Link", "name": "button_link", "type": "url"},
+                        {"key": "field_hero_bg_color", "label": "Content Background Color", "name": "bg_color", "type": "color_picker", "default_value": "#EBF2F2"}
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_packages_showcase": {
+                    "key": "layout_packages_showcase",
+                    "name": "packages-showcase",
+                    "label": "Packages Showcase",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_showcase_bg_color", "label": "Background Color", "name": "background_color", "type": "color_picker", "default_value": "#FFFFFF"},
+                        {"key": "field_showcase_title", "label": "Section Title", "name": "title", "type": "text"},
+                        {
+                            "key": "field_showcase_packages",
+                            "label": "Packages",
+                            "name": "packages",
+                            "type": "repeater",
+                            "button_label": "Add Package Block",
+                            "layout": "block",
+                            "sub_fields": [
+                                {"key": "field_showcase_pkg_image", "label": "Image", "name": "image", "type": "image", "return_format": "array"},
+                                {"key": "field_showcase_pkg_image_position", "label": "Image Position", "name": "image_position", "type": "radio", "choices": {"left": "Image Left, Content Right", "right": "Image Right, Content Left"}, "default_value": "left", "layout": "horizontal"},
+                                {"key": "field_showcase_pkg_heading", "label": "Heading", "name": "heading", "type": "text", "required": 1},
+                                {"key": "field_showcase_pkg_description", "label": "Description", "name": "description", "type": "textarea", "rows": 3},
+                                {
+                                    "key": "field_showcase_pkg_items",
+                                    "label": "Items",
+                                    "name": "items",
+                                    "type": "repeater",
+                                    "button_label": "Add Item",
+                                    "layout": "table",
+                                    "sub_fields": [
+                                        {"key": "field_showcase_pkg_item_icon", "label": "Icon", "name": "icon", "type": "image", "return_format": "array"},
+                                        {"key": "field_showcase_pkg_item_icon_color", "label": "Icon Color", "name": "icon_color", "type": "color_picker", "default_value": "#FED574", "wrapper": {"width": "20"}},
+                                        {"key": "field_showcase_pkg_item_text", "label": "Text", "name": "text", "type": "text", "required": 1}
+                                    ]
+                                },
+                                {"key": "field_showcase_pkg_button_primary", "label": "Primary Button", "name": "button_primary", "type": "link", "return_format": "array"},
+                                {"key": "field_showcase_pkg_button_secondary", "label": "Secondary Button", "name": "button_secondary", "type": "link", "return_format": "array"}
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_packages_details": {
+                    "key": "layout_packages_details",
+                    "name": "packages-details",
+                    "label": "Packages Details",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_details_heading", "label": "Heading", "name": "heading", "type": "text"},
+                        {"key": "field_details_description", "label": "Description", "name": "description", "type": "textarea", "rows": 3},
+                        {"key": "field_details_packages", "label": "Select Packages", "name": "packages", "type": "relationship", "post_type": ["package"], "filters": ["search", "taxonomy"], "return_format": "id", "min": 1}
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_testimonials": {
+                    "key": "layout_testimonials",
+                    "name": "testimonials",
+                    "label": "Testimonials",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_testimonials_title", "label": "Section Title", "name": "title", "type": "text"},
+                        {"key": "field_testimonials_rating_text", "label": "Rating Text", "name": "rating_text", "type": "text", "default_value": "Rated 5\/5 Based on 109 reviews"},
+                        {"key": "field_testimonials_shortcode", "label": "Shortcode", "name": "shortcode", "type": "text"}
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_cta_section": {
+                    "key": "layout_cta_section",
+                    "name": "cta-section",
+                    "label": "CTA Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {"key": "field_cta_heading", "label": "Heading", "name": "heading", "type": "text", "required": 1},
+                        {"key": "field_cta_content", "label": "Content", "name": "content", "type": "wysiwyg", "toolbar": "basic", "media_upload": 0},
+                        {
+                            "key": "field_cta_features",
+                            "label": "Features",
+                            "name": "features",
+                            "type": "repeater",
+                            "button_label": "Add Feature",
+                            "layout": "block",
+                            "sub_fields": [
+                                {"key": "field_cta_feature_icon", "label": "Icon", "name": "icon", "type": "image", "return_format": "array"},
+                                {"key": "field_cta_feature_title", "label": "Title", "name": "title", "type": "text", "required": 1},
+                                {"key": "field_cta_feature_text", "label": "Description", "name": "description", "type": "textarea", "rows": 2}
+                            ]
+                        },
+                        {"key": "field_cta_button_text", "label": "Button Text", "name": "button_text", "type": "text", "default_value": "Get a free consultation"},
+                        {"key": "field_cta_button_link", "label": "Button Link", "name": "button_link", "type": "link"}
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "min": "",
+            "max": "",
+            "button_label": "Add Module"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Flexible content page modules",
+    "show_in_rest": 0
+}

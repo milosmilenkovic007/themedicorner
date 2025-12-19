@@ -61,6 +61,26 @@ function hello_elementor_child_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_styles', 20 );
 
 /**
+ * Admin UI tweaks for ACF fields
+ */
+add_action( 'admin_head', function() {
+        // Make Packages Showcase bullet icons preview smaller inside repeater.
+        echo '<style>
+            .acf-field[data-key="field_showcase_pkg_item_icon"] .acf-image-uploader .image-wrap img,
+            .acf-field[data-key="field_showcase_pkg_item_icon"] img {
+                max-width: 28px !important;
+                max-height: 28px !important;
+                width: 28px !important;
+                height: 28px !important;
+                object-fit: contain;
+            }
+            .acf-field[data-key="field_showcase_pkg_item_icon"] .acf-image-uploader .image-wrap {
+                max-width: 34px;
+            }
+        </style>';
+} );
+
+/**
  * ACF Options Page
  * Uncomment this when ACF Pro is installed
  */

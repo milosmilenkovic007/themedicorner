@@ -1,6 +1,7 @@
 <?php
 /**
- * ACF Field Groups Registration for Hello Elementor Child Theme
+ * ACF Field Groups Registration
+ * Clean setup with flexible page modules
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +13,7 @@ function hello_child_register_acf_field_groups() {
         return;
     }
 
-    // Template Control
+    // Template Control - Global
     acf_add_local_field_group( array(
         'key' => 'group_template_control',
         'title' => 'Template Control',
@@ -22,8 +23,8 @@ function hello_child_register_acf_field_groups() {
                 'label' => 'Use ACF Template',
                 'name' => 'use_acf_template',
                 'type' => 'true_false',
-                'instructions' => 'Enable this to use the ACF template instead of Elementor',
-                'message' => 'Use ACF template for this page',
+                'instructions' => 'Enable to use ACF flexible modules instead of Elementor',
+                'message' => 'Use ACF flexible modules',
                 'ui' => 1,
             ),
         ),
@@ -41,7 +42,7 @@ function hello_child_register_acf_field_groups() {
         'active' => true,
     ) );
 
-    // Page Modules - Flexible Content with all layouts
+    // Page Modules - Flexible Content
     acf_add_local_field_group( array(
         'key' => 'group_page_modules',
         'title' => 'Page Modules',
@@ -295,6 +296,7 @@ function hello_child_register_acf_field_groups() {
                         ),
                     ),
                 ),
+            ),
         ),
         'location' => array(
             array(

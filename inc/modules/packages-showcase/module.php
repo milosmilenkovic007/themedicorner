@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$title = $data['title'] ?? '';
-$packages = $data['packages'] ?? array();
+$title = $data['field_showcase_title'] ?? $data['title'] ?? '';
+$packages = $data['field_showcase_packages'] ?? $data['packages'] ?? array();
 ?>
 
 <section class="module-packages-showcase">
@@ -21,10 +21,10 @@ $packages = $data['packages'] ?? array();
         <div class="packages-showcase__grid">
             <?php foreach ( $packages as $package ) : ?>
                 <?php
-                $number = $package['number'] ?? '';
-                $name = $package['name'] ?? '';
-                $description = $package['description'] ?? '';
-                $is_featured = $package['is_featured'] ?? false;
+                $number = $package['field_showcase_pkg_number'] ?? $package['number'] ?? '';
+                $name = $package['field_showcase_pkg_name'] ?? $package['name'] ?? '';
+                $description = $package['field_showcase_pkg_description'] ?? $package['description'] ?? '';
+                $is_featured = $package['field_showcase_pkg_featured'] ?? $package['is_featured'] ?? false;
                 ?>
                 <div class="packages-showcase__item <?php echo $is_featured ? 'is-featured' : ''; ?>">
                     <?php if ( $number ) : ?>

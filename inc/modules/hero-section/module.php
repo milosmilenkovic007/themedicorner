@@ -7,10 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$title    = $data['title'] ?? '';
-$subtitle = $data['subtitle'] ?? '';
-$image    = $data['background_image'] ?? [];
-$height   = $data['height'] ?? 'large';
+$title    = $data['field_hero_title'] ?? $data['title'] ?? '';
+$subtitle = $data['field_hero_subtitle'] ?? $data['subtitle'] ?? '';
+$image    = $data['field_hero_image'] ?? $data['background_image'] ?? [];
+$height   = $data['field_hero_height'] ?? $data['height'] ?? 'large';
 
 $height_class = 'hero--' . $height;
 if ( $height === 'full' ) {
@@ -18,7 +18,14 @@ if ( $height === 'full' ) {
 }
 
 $bg_style = '';
-if ( ! empty( $image ) && isset( $image['url'] ) ) {
+if ( ! empty( $image ) && ! is_array( $image ) ) {
+    // Image is an ID, get the URL
+    $image_url = wp_get_attachment_url( $image );
+    if ( $image_url ) {
+        $bg_style = 'background-image: url(' . esc_url( $image_url ) . ')';
+    }
+} elseif ( is_array( $image ) && isset( $image['url'] ) ) {
+    // Image is already an array with URL
     $bg_style = 'background-image: url(' . esc_url( $image['url'] ) . ')';
 }
 ?>

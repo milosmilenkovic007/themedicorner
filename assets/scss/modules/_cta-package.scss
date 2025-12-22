@@ -51,7 +51,7 @@
     line-height: 1.4;
 
     @include max-width($breakpoint-md) {
-      font-size: 25px;
+      font-size: 15px;
     }
   }
 
@@ -95,6 +95,12 @@
     text-decoration: none;
     transition: all 0.3s ease;
 
+    @include max-width($breakpoint-md) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(30, 175, 160, 0.3);
@@ -123,6 +129,7 @@
     @include max-width($breakpoint-md) {
       border-radius: 24px;
       min-height: 300px;
+      order: -1;
     }
   }
 

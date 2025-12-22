@@ -83,7 +83,8 @@
                     "sub_fields": [
                         {"key": "field_details_heading", "label": "Heading", "name": "heading", "type": "text"},
                         {"key": "field_details_description", "label": "Description", "name": "description", "type": "textarea", "rows": 3},
-                        {"key": "field_details_packages", "label": "Select Packages", "name": "packages", "type": "relationship", "post_type": ["package"], "filters": ["search", "taxonomy"], "return_format": "id", "min": 1}
+                        {"key": "field_details_packages", "label": "Select Packages", "name": "packages", "type": "relationship", "post_type": ["package"], "filters": ["search", "taxonomy"], "return_format": "id", "min": 1},
+                        {"key": "field_details_additional_package", "label": "Additional Package", "name": "additional_package", "type": "relationship", "post_type": ["package"], "filters": ["search", "taxonomy"], "return_format": "id", "max": 1, "instructions": "Optional: select one additional package to display horizontally below the comparison grid."}
                     ],
                     "min": "",
                     "max": ""

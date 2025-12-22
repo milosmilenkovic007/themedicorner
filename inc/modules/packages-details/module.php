@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $heading     = $data['heading'] ?? '';
 $description = $data['description'] ?? '';
 $selected    = $data['packages'] ?? array();
+$additional_package_raw = $data['additional_package'] ?? array();
 
 // Normalize relationship return values to IDs.
 if ( is_array( $selected ) ) {
@@ -307,5 +308,78 @@ if ( $pkg_count === 0 ) {
                 <button type="button" class="packages-details__toggle-all" data-pd-toggle-all>Show all</button>
             </div>
         </div>
+
+        <?php
+        // Additional Package: horizontal layout below the main grid
+        $additional_package_id = 0;
+        if ( is_array( $additional_package_raw ) && ! empty( $additional_package_raw ) ) {
+            $first = reset( $additional_package_raw );
+            if ( is_numeric( $first ) ) {
+                $additional_package_id = intval( $first );
+            } elseif ( is_object( $first ) && isset( $first->ID ) ) {
+                $additional_package_id = intval( $first->ID );
+            } elseif ( is_array( $first ) && isset( $first['ID'] ) ) {
+                $additional_package_id = intval( $first['ID'] );
+            }
+        }
+
+        if ( $additional_package_id ) {
+            $add_post = get_post( $additional_package_id );
+            if ( $add_post && $add_post->post_type === 'package' ) {
+                // For visitors only show published
+                if ( is_user_logged_in() || get_post_status( $additional_package_id ) === 'publish' ) {
+                    $add_title = get_the_title( $additional_package_id );
+                    $add_sections = function_exists( 'get_field' ) ? ( get_field( 'include_sections', $additional_package_id ) ?: array() ) : array();
+                    
+                    if ( ! empty( $add_sections ) && is_array( $add_sections ) ) :
+        ?>
+        <div class="packages-details__additional">
+            <div class="packages-details__additional-inner" style="<?php echo esc_attr( $arrow_style ); ?>">
+                <div class="packages-details__additional-header">
+                    <h3 
+                        class="packages-details__additional-title" 
+                        role="button"
+                        tabindex="0"
+                        aria-expanded="true"
+                        data-pd-additional-toggle
+                    >
+                        <?php echo esc_html( $add_title ); ?>
+                    </h3>
+                </div>
+                <div class="packages-details__additional-content" data-pd-additional-content>
+                    <?php foreach ( $add_sections as $sec ) : ?>
+                        <?php
+                            $line1 = trim( (string) ( $sec['title_line_1'] ?? '' ) );
+                            $line2 = trim( (string) ( $sec['title_line_2'] ?? '' ) );
+                            $items = is_array( $sec['items'] ?? null ) ? $sec['items'] : array();
+                            if ( empty( $items ) ) { continue; }
+                        ?>
+                        <div class="packages-details__additional-section">
+                            <div class="packages-details__additional-section-title">
+                                <?php if ( $line1 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line1 ); ?></span><?php endif; ?>
+                                <?php if ( $line2 ) : ?><span class="packages-details__section-line"><?php echo esc_html( $line2 ); ?></span><?php endif; ?>
+                            </div>
+                            <ul class="packages-details__list packages-details__additional-list">
+                                <?php foreach ( $items as $it ) : ?>
+                                    <?php $item_text = trim( (string) ( is_array( $it ) ? ( $it['text'] ?? '' ) : $it ) ); ?>
+                                    <?php if ( $item_text ) : ?>
+                                        <li class="packages-details__list-item">
+                                            <img class="packages-details__check" src="<?php echo esc_url( $checkmark_url ); ?>" alt="" />
+                                            <span class="packages-details__text"><?php echo esc_html( $item_text ); ?></span>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+        <?php
+                    endif;
+                }
+            }
+        }
+        ?>
     </div>
 </section>

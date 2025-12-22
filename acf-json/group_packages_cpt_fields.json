@@ -45,6 +45,26 @@
             "new_lines": ""
         },
         {
+            "key": "field_package_is_additional",
+            "label": "Additional Package",
+            "name": "is_additional_package",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Mark this as an additional package (displays separately in comparison tables)",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_package_include_sections",
             "label": "Include Sections",
             "name": "include_sections",

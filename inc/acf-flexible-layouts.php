@@ -57,6 +57,7 @@ function hello_child_render_flexible_layout( $layout ) {
             $data['heading']     = $layout['field_details_heading'] ?? '';
             $data['description'] = $layout['field_details_description'] ?? '';
             $data['packages']    = $layout['field_details_packages'] ?? array();
+            $data['additional_package'] = $layout['field_details_additional_package'] ?? array();
             $data['acf_fc_layout'] = $layout['acf_fc_layout'];
         } else {
             // Default: keep all data as-is

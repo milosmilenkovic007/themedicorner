@@ -425,6 +425,32 @@ import '../scss/main.scss';
           resetBiochemScroll($root);
         }
       );
+
+      // Additional package accordion toggle
+      $(document).on('click', '[data-pd-additional-toggle]', function(e) {
+        if ($(e.target).closest('a, button, input, select, textarea').length) return;
+        const $toggle = $(this);
+        const $container = $toggle.closest('.packages-details__additional-inner');
+        if (!$container.length) return;
+
+        const isCollapsed = $container.hasClass('is-collapsed');
+        $container.toggleClass('is-collapsed', !isCollapsed);
+        $toggle.attr('aria-expanded', isCollapsed ? 'true' : 'false');
+      });
+
+      $(document).on('keydown', '[data-pd-additional-toggle]', function(e) {
+        const key = e.key || e.keyCode;
+        if (key === 'Enter' || key === ' ' || key === 13 || key === 32) {
+          e.preventDefault();
+          const $toggle = $(this);
+          const $container = $toggle.closest('.packages-details__additional-inner');
+          if (!$container.length) return;
+
+          const isCollapsed = $container.hasClass('is-collapsed');
+          $container.toggleClass('is-collapsed', !isCollapsed);
+          $toggle.attr('aria-expanded', isCollapsed ? 'true' : 'false');
+        }
+      });
     },
 
     initializeCarousels() {

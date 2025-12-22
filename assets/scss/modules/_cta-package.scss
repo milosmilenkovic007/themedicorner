@@ -25,7 +25,7 @@
   }
 
   .cta-package__content {
-    padding: 60px 70px;
+    padding: 20px 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -101,6 +101,7 @@
     border-radius: 24px;
     overflow: hidden;
     min-height: 400px;
+    max-height: 436px;
 
     @include max-width($breakpoint-md) {
       border-radius: 24px;

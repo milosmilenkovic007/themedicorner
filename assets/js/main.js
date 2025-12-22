@@ -66,6 +66,25 @@ import '../scss/main.scss';
         });
       };
 
+      const activateIndex = ($root, index, opts = {}) => {
+        const { resetState = true, resetBiochem = true } = opts;
+        setActive($root, index);
+
+        if (resetState) {
+          resetSectionsState($root);
+        }
+
+        // Always keep Biochemistry scroll syncing set up; only reset scroll when doing a full reset.
+        setupBiochemSyncedScroll($root);
+        if (resetBiochem && resetState) {
+          resetBiochemScroll($root);
+        }
+
+        // Only meaningful when section states change; harmless otherwise.
+        updateToggleAllLabel($root);
+        markDiffItems($root);
+      };
+
       const normalizeItemText = (text) => {
         return String(text || '')
           .replace(/\s+/g, ' ')
@@ -283,12 +302,7 @@ import '../scss/main.scss';
         const $root = $(this);
         const $first = $root.find('.packages-details__tab').first();
         const initIdx = $first.length ? Number($first.data('index')) : 0;
-        setActive($root, Number.isNaN(initIdx) ? 0 : initIdx);
-        resetSectionsState($root);
-        setupBiochemSyncedScroll($root);
-        resetBiochemScroll($root);
-        updateToggleAllLabel($root);
-        markDiffItems($root);
+        activateIndex($root, Number.isNaN(initIdx) ? 0 : initIdx, { resetState: true, resetBiochem: true });
       });
 
       // Click handler
@@ -296,12 +310,23 @@ import '../scss/main.scss';
         const $btn = $(this);
         const $root = $btn.closest('[data-packages-details]');
         if (!$root.length) return;
-        setActive($root, $btn.data('index'));
-        resetSectionsState($root);
-        setupBiochemSyncedScroll($root);
-        resetBiochemScroll($root);
-        updateToggleAllLabel($root);
-        markDiffItems($root);
+
+        // Explicit tab click keeps the existing behavior: reset open state back to the first section.
+        activateIndex($root, $btn.data('index'), { resetState: true, resetBiochem: true });
+      });
+
+      // Desktop: clicking anywhere in a package column switches the active package.
+      // IMPORTANT: This should NOT reset the open state back to "Medical Examinations".
+      $(document).on('click', '[data-packages-details] .packages-details__grid .packages-details__items', function(e) {
+        if ($(e.target).closest('a, button, input, select, textarea').length) return;
+        const $cell = $(this);
+        const $root = $cell.closest('[data-packages-details]');
+        if (!$root.length) return;
+
+        const col = Number($cell.data('col'));
+        if (Number.isNaN(col)) return;
+
+        activateIndex($root, col, { resetState: false, resetBiochem: false });
       });
 
       // Show all / Close all

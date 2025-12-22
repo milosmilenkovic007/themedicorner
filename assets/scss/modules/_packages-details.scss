@@ -217,6 +217,11 @@
     background: #ebf2f2;
   }
 
+  // Clicking a package column switches the active package
+  .packages-details__grid .packages-details__items {
+    cursor: pointer;
+  }
+
   // Biochemistry Laboratory: last two columns can have many items.
   // Show ~10 items and let the rest scroll (scrollbar hidden).
   .packages-details__grid-row[data-pd-section="biochemistry-laboratory"] {

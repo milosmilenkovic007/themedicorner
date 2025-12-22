@@ -415,19 +415,22 @@
 
   .packages-details__footer {
     display: flex;
-    justify-content: center;
-    margin-top: 16px;
+    justify-content: flex-end;
+    margin-top: 0px;
+    margin-right: 25px;
   }
 
   .packages-details__toggle-all {
     appearance: none;
-    background: transparent;
-    border: 1px solid rgba(5, 59, 63, 0.25);
-    color: #053b3f;
+    background: rgb(5 59 63);
+    border: 0px solid rgba(5, 59, 63, .25);
+    color: #ffffff;
     border-radius: 10px;
     padding: 10px 16px;
     font-weight: 600;
     cursor: pointer;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   @include max-width($breakpoint-md) {

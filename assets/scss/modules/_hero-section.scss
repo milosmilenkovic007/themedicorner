@@ -12,6 +12,14 @@
   left: 50%;
   transform: translateX(-50%);
 
+  @include max-width($breakpoint-md) {
+    width: 100%;
+    left: 0;
+    transform: none;
+    padding: 20px 10px;
+    box-sizing: border-box;
+  }
+
  
 
   &__inner {
@@ -30,17 +38,19 @@
     }
 
     @include max-width($breakpoint-md) {
-      gap: $spacing-lg;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 0;
     }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     background-color: #EBF2F2;
-    padding: 0px 48px 0px 48px;
-    border-radius: 20px;
+    padding: 32px 28px;
+    border-radius: 24px;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -65,6 +75,13 @@
       padding: $spacing-2xl;
       max-width: 100%;
     }
+
+    @include max-width($breakpoint-md) {
+      order: 2;
+      padding: 28px 22px;
+      gap: 14px;
+      border-radius: 20px;
+    }
   }
 
   &__title {
@@ -79,7 +96,8 @@
     }
 
     @include max-width($breakpoint-md) {
-      font-size: 1.5rem;
+      font-size: 2rem;
+      line-height: 1.25;
     }
   }
 
@@ -92,7 +110,8 @@
     max-width: 440px;
 
     @include max-width($breakpoint-md) {
-      font-size: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
     }
   }
 
@@ -100,6 +119,10 @@
     display: inline-flex;
     width: fit-content;
     margin-top: $spacing-md;
+
+    @include max-width($breakpoint-md) {
+      width: 100%;
+    }
 
     .btn {
       padding: 16px 32px;
@@ -116,6 +139,13 @@
       line-height: 1.2em;
       text-transform: none;
       letter-spacing: 0;
+
+      @include max-width($breakpoint-md) {
+        width: 100%;
+        justify-content: center;
+        padding: 18px 24px;
+        font-size: 16px;
+      }
 
       &--primary {
         background-color: #00A579;
@@ -167,6 +197,13 @@
     @include max-width($breakpoint-lg) {
       max-width: 100%;
       min-height: 400px;
+    }
+
+    @include max-width($breakpoint-md) {
+      order: 1;
+      min-height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
     }
   }
 }

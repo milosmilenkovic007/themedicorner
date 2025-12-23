@@ -125,53 +125,9 @@
     }
 
     .btn {
-      padding: 16px 32px;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      border: none;
-      cursor: pointer;
-      font-size: $font-size-base;
-      line-height: 1.2em;
-      text-transform: none;
-      letter-spacing: 0;
-
       @include max-width($breakpoint-md) {
         width: 100%;
         justify-content: center;
-        padding: 18px 24px;
-        font-size: 16px;
-      }
-
-      &--primary {
-        background-color: #00A579;
-        color: white;
-
-        &:hover {
-          background-color: #008561;
-          transform: translateY(-2px);
-        }
-
-        .btn__icon {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.3s ease;
-        }
-
-        .btn__icon img {
-          width: 18px;
-          height: 10px;
-          display: block;
-        }
-
-        &:hover .btn__icon {
-          transform: translateX(4px);
-        }
       }
     }
   }

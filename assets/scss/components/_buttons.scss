@@ -3,85 +3,81 @@
  */
 
 .btn {
+  padding: 14px 22px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-md $spacing-lg;
-  font-size: $font-size-base;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: $radius-lg;
-  border: 2px solid transparent;
+  gap: 16px;
   cursor: pointer;
-  @include transition(all);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  gap: $spacing-sm;
+  font-size: 16px;
+  line-height: 1.2em;
+  text-transform: none;
+  letter-spacing: 0;
+  border: 1px solid transparent;
+  transform: none;
+
+  .btn__text {
+    color: #ffffff;
+  }
 
   &:hover,
   &:focus {
     transform: translateY(-2px);
   }
 
-  // Variants
+  .btn__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
+  .btn__icon img {
+    width: 18px;
+    height: 10px;
+    display: block;
+  }
+
+  &:hover .btn__icon {
+    transform: translateX(4px);
+  }
+
+  // Variants (match module-packages-showcase)
   &--primary {
-    background: $primary-color;
-    color: $white;
+    background-color: #00a579;
+    color: #ffffff;
+    border-color: transparent;
 
-    &:hover {
-      background: shade($primary-color, 10%);
+    .btn__icon {
+      background-color: rgba(0, 0, 0, 0.12);
+      border-color: transparent;
     }
-  }
-
-  &--secondary {
-    background: $secondary-color;
-    color: $white;
 
     &:hover {
-      background: shade($secondary-color, 10%);
-    }
-  }
-
-  &--accent {
-    background: $accent-color;
-    color: $white;
-
-    &:hover {
-      background: shade($accent-color, 10%);
-    }
-  }
-
-  &--white {
-    background: $white;
-    color: $primary-color;
-    border-color: $white;
-
-    &:hover {
-      background: transparent;
-      color: $white;
+      background-color: #008561;
     }
   }
 
   &--outline {
     background: transparent;
-    border-color: $primary-color;
-    color: $primary-color;
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+
+    .btn__icon {
+      background: transparent;
+    }
 
     &:hover {
-      background: $primary-color;
-      color: $white;
+      border-color: rgba(255, 255, 255, 0.8);
     }
-  }
-
-  // Sizes
-  &--sm {
-    padding: $spacing-sm $spacing-md;
-    font-size: $font-size-sm;
-  }
-
-  &--lg {
-    padding: $spacing-lg $spacing-2xl;
-    font-size: $font-size-lg;
   }
 
   // Full width

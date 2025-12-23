@@ -477,6 +477,14 @@ function hello_child_register_acf_field_groups() {
                                 ),
                             ),
                             array(
+                                'key' => 'field_cta_image',
+                                'label' => 'Image',
+                                'name' => 'image',
+                                'type' => 'image',
+                                'return_format' => 'array',
+                                'preview_size' => 'large',
+                            ),
+                            array(
                                 'key' => 'field_cta_button_text',
                                 'label' => 'Button Text',
                                 'name' => 'button_text',

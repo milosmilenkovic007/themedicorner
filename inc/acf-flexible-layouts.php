@@ -59,6 +59,30 @@ function hello_child_render_flexible_layout( $layout ) {
             $data['packages']    = $layout['field_details_packages'] ?? array();
             $data['additional_package'] = $layout['field_details_additional_package'] ?? array();
             $data['acf_fc_layout'] = $layout['acf_fc_layout'];
+        } elseif ( $layout_type === 'cta-section' ) {
+            // Map ACF field keys (and nested repeater field keys) to field names
+            $data['heading'] = $layout['field_cta_heading'] ?? ( $layout['heading'] ?? '' );
+
+            $raw_features = $layout['field_cta_features'] ?? ( $layout['features'] ?? array() );
+            $features = array();
+            if ( is_array( $raw_features ) ) {
+                foreach ( $raw_features as $feature ) {
+                    if ( ! is_array( $feature ) ) {
+                        continue;
+                    }
+                    $features[] = array(
+                        'icon'        => $feature['field_cta_feature_icon'] ?? ( $feature['icon'] ?? null ),
+                        'title'       => $feature['field_cta_feature_title'] ?? ( $feature['title'] ?? '' ),
+                        'description' => $feature['field_cta_feature_text'] ?? ( $feature['description'] ?? '' ),
+                    );
+                }
+            }
+
+            $data['features'] = $features;
+            $data['image'] = $layout['field_cta_image'] ?? ( $layout['image'] ?? null );
+            $data['button_text'] = $layout['field_cta_button_text'] ?? ( $layout['button_text'] ?? '' );
+            $data['button_link'] = $layout['field_cta_button_link'] ?? ( $layout['button_link'] ?? null );
+            $data['acf_fc_layout'] = $layout['acf_fc_layout'];
         } elseif ( $layout_type === 'cta-package' ) {
             // Map ACF field keys to field names for cta-package
             $data['heading']              = $layout['field_cta_pkg_heading'] ?? '';

@@ -69,11 +69,11 @@ $block_style = sprintf(
                 <?php endif; ?>
 
                 <?php if ( $button_text && $button_link ) : ?>
-                    <a href="<?php echo esc_url( $button_link ); ?>" class="cta-package__button">
-                        <?php echo esc_html( $button_text ); ?>
-                        <svg class="cta-package__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 1L8 15M8 15L15 8M8 15L1 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <a href="<?php echo esc_url( $button_link ); ?>" class="btn btn--primary cta-package__button">
+                        <span class="btn__text"><?php echo esc_html( $button_text ); ?></span>
+                        <span class="btn__icon" aria-hidden="true">
+                            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/arrow.svg' ); ?>" alt="" />
+                        </span>
                     </a>
                 <?php endif; ?>
             </div>

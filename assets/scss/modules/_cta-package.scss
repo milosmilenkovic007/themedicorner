@@ -83,38 +83,9 @@
   }
 
   .cta-package__button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    background: var(--cta-btn-bg, #1eafa0);
-    color: var(--cta-btn-text, #ffffff);
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-
     @include max-width($breakpoint-md) {
       width: 100%;
-      display: flex;
       justify-content: center;
-    }
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(30, 175, 160, 0.3);
-    }
-  }
-
-  .cta-package__arrow {
-    width: 16px;
-    height: 16px;
-    transform: rotate(-90deg);
-    transition: transform 0.3s ease;
-
-    .cta-package__button:hover & {
-      transform: rotate(-90deg) translateX(3px);
     }
   }
 

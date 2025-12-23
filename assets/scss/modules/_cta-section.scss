@@ -16,7 +16,7 @@
   .cta-section__grid {
     display: grid;
     grid-template-columns: 69.2% 30.8%;
-    gap: 36px;
+    gap: 0;
     align-items: start;
   }
 
@@ -86,19 +86,30 @@
   }
 
   .cta-section__image-wrap {
+    position: relative;
     border-radius: 24px;
     overflow: hidden;
     background: transparent;
   }
 
+  .cta-section__image-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: linear-gradient(180deg, rgba(235, 242, 242, 0) 80%, var(--e-global-color-c8ede70) 95%);
+  }
+
   .cta-section__image {
+    position: relative;
+    z-index: 0;
     width: 100%;
     height: auto;
     display: block;
   }
 
   .cta-section__button {
-    margin-top: 18px;
+    margin-top: 0;
   }
 
   @include max-width($breakpoint-md) {

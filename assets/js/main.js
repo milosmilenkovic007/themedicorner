@@ -17,6 +17,7 @@ import '../scss/main.scss';
       this.initializeAccordions();
       this.initializePackagesDetails();
       this.initializeCarousels();
+      this.initializeTestimonialsNav();
       this.initializeScrollAnimations();
     },
 
@@ -452,6 +453,94 @@ import '../scss/main.scss';
         }
       });
     },
+
+  initializeTestimonialsNav() {
+    const $modules = $('.module-testimonials');
+    if (!$modules.length) return;
+
+    const tryBind = ($module) => {
+      const $carousel = $module.find('.testimonials__carousel').first();
+      if (!$carousel.length) return false;
+
+      const $btnPrev = $module.find('.testimonials__nav-btn--prev').first();
+      const $btnNext = $module.find('.testimonials__nav-btn--next').first();
+      if (!$btnPrev.length || !$btnNext.length) return false;
+
+      // 1) Swiper (most Trustindex widgets)
+      const swiperEl = $carousel[0].querySelector('.swiper, .swiper-container');
+      const swiper = swiperEl && swiperEl.swiper ? swiperEl.swiper : null;
+      if (swiper) {
+        // Remove the "peek" effect by disabling centered slides and forcing exact slides per view.
+        try {
+          swiper.params.centeredSlides = false;
+          swiper.params.slidesPerView = 3;
+          swiper.params.spaceBetween = 28;
+          swiper.params.slidesOffsetBefore = 0;
+          swiper.params.slidesOffsetAfter = 0;
+          swiper.params.breakpoints = Object.assign({}, swiper.params.breakpoints || {}, {
+            0: { slidesPerView: 1, spaceBetween: 16, centeredSlides: false },
+            768: { slidesPerView: 2, spaceBetween: 20, centeredSlides: false },
+            992: { slidesPerView: 3, spaceBetween: 28, centeredSlides: false },
+          });
+          swiper.update();
+        } catch (e) {}
+
+        $btnPrev.off('click.testimonialsNav').on('click.testimonialsNav', function() {
+          swiper.slidePrev();
+        });
+        $btnNext.off('click.testimonialsNav').on('click.testimonialsNav', function() {
+          swiper.slideNext();
+        });
+        return true;
+      }
+
+      // 2) Slick
+      const $slick = $carousel.find('.slick-slider.slick-initialized, .slick-initialized').first();
+      if ($slick.length && typeof $slick.slick === 'function') {
+        try {
+          $slick.slick('slickSetOption', {
+            centerMode: false,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          }, true);
+        } catch (e) {}
+
+        $btnPrev.off('click.testimonialsNav').on('click.testimonialsNav', function() {
+          $slick.slick('slickPrev');
+        });
+        $btnNext.off('click.testimonialsNav').on('click.testimonialsNav', function() {
+          $slick.slick('slickNext');
+        });
+        return true;
+      }
+
+      // 3) Fallback: click Trustindex-provided arrows (hidden via CSS)
+      const btnPrev = $carousel[0].querySelector('.ti-prev, .swiper-button-prev, .slick-prev');
+      const btnNext = $carousel[0].querySelector('.ti-next, .swiper-button-next, .slick-next');
+      if (btnPrev || btnNext) {
+        $btnPrev.off('click.testimonialsNav').on('click.testimonialsNav', function() {
+          if (btnPrev) btnPrev.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        });
+        $btnNext.off('click.testimonialsNav').on('click.testimonialsNav', function() {
+          if (btnNext) btnNext.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        });
+        return true;
+      }
+
+      return false;
+    };
+
+    $modules.each(function() {
+      const $module = $(this);
+      let attempts = 0;
+      const timer = setInterval(() => {
+        attempts += 1;
+        if (tryBind($module) || attempts >= 25) {
+          clearInterval(timer);
+        }
+      }, 200);
+    });
+  },
 
     initializeCarousels() {
       // Carousel functionality (if using a carousel library)

@@ -1,1 +1,185 @@
 /* Testimonials */
+
+.module-testimonials {
+	position: relative;
+	margin: 30px 0;
+	padding: 70px 0;
+
+	.container {
+		position: relative;
+	}
+
+	@include max-width($breakpoint-md) {
+		margin: 30px 0;
+		padding: 40px 0;
+	}
+
+	.testimonials__header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	.testimonials__header-right {
+		flex: 0 0 auto;
+	}
+
+	.testimonials__nav {
+		display: inline-flex;
+		gap: 12px;
+	}
+
+	.testimonials__nav-btn {
+		appearance: none;
+		border: 0;
+		padding: 0;
+		width: 54px;
+		height: 54px;
+		border-radius: 999px;
+		background: #053b3f;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+
+	.testimonials__nav-btn img {
+		width: 18px;
+		height: 10px;
+		display: block;
+	}
+
+	.testimonials__nav-btn--prev img {
+		transform: rotate(180deg);
+	}
+
+	.testimonials__title {
+		margin: 0;
+		color: #053b3f;
+        font-size: 35px;
+        font-weight: 500;
+        line-height: 1.4;
+
+		@include max-width($breakpoint-md) {
+			font-size: 25px;
+		}
+	}
+
+	.testimonials__rating {
+		margin: 0;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		color: rgba(5, 59, 63, 0.9);
+		font-size: 16px;
+		line-height: 1.5;
+	}
+
+	.testimonials__carousel {
+		position: relative;
+		margin-top: 42px;
+		overflow: hidden;
+	}
+
+	.testimonials__carousel {
+		.ti-widget-container {
+			width: 100%;
+			margin: 0 auto;
+			padding: 0 !important;
+			overflow: hidden !important;
+		}
+
+		// Prevent “peek” cards at the edges.
+		.swiper,
+		.swiper-container,
+		.slick-list {
+			overflow: hidden !important;
+		}
+
+		// Normalize common row wrappers so the 3-up sizing is respected.
+		.ti-reviews-container,
+		.swiper-wrapper,
+		.slick-track {
+			gap: 28px !important;
+			margin: 0 !important;
+			padding: 0 !important;
+		}
+
+		// Force smaller cards so 3 are visible on desktop.
+		// Trustindex uses .ti-review-item for each card.
+		.ti-review-item {
+			position: relative !important;
+			overflow: hidden;
+			margin: 0 !important;
+			flex: 0 0 calc((100% - 56px) / 3) !important;
+			max-width: calc((100% - 56px) / 3) !important;
+		}
+
+		// Corner decoration (bottom-right) on each card.
+		.ti-review-item:after {
+			content: '';
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 78px;
+			height: 78px;
+			background: url('../images/m-corner-shape-lg.svg') no-repeat;
+			background-size: contain;
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		.ti-review-item > * {
+			position: relative;
+			z-index: 1;
+		}
+
+		@include max-width($breakpoint-lg) {
+			.ti-review-item {
+				flex-basis: calc((100% - 32px) / 2) !important;
+				max-width: calc((100% - 32px) / 2) !important;
+			}
+		}
+
+		@include max-width($breakpoint-md) {
+			.ti-review-item {
+				flex-basis: 100% !important;
+				max-width: 100% !important;
+			}
+
+			.ti-review-item:after {
+				width: 62px;
+				height: 62px;
+			}
+		}
+
+		// Trustindex widgets often render their own header; hide it to match design.
+		.ti-header,
+		.ti-widget-header {
+			display: none !important;
+		}
+
+		// Hide built-in navigation (we use our own buttons in the header).
+		.ti-prev,
+		.ti-next,
+		.swiper-button-prev,
+		.swiper-button-next,
+		.slick-prev,
+		.slick-next {
+			opacity: 0 !important;
+			pointer-events: none !important;
+		}
+	}
+
+	@include max-width($breakpoint-md) {
+		.testimonials__nav-btn {
+			width: 46px;
+			height: 46px;
+		}
+
+		.testimonials__carousel {
+			margin-top: 28px;
+		}
+	}
+}

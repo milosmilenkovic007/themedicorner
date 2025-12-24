@@ -15,6 +15,7 @@ import '../scss/main.scss';
       // Initialize components
       this.initializeModals();
       this.initializeAccordions();
+      this.initializePackageAccordions();
       this.initializePackagesDetails();
       this.initializeCarousels();
       this.initializeTestimonialsNav();
@@ -44,6 +45,28 @@ import '../scss/main.scss';
         
         if (!isActive) {
           item.addClass('active');
+        }
+      });
+    },
+
+    initializePackageAccordions() {
+      // Group collapse/expand: first 3 accordions work together
+      const $firstRowAccordions = $('.package-sections__accordion-item:nth-child(1), .package-sections__accordion-item:nth-child(2), .package-sections__accordion-item:nth-child(3)');
+      
+      $firstRowAccordions.on('toggle', function() {
+        const $this = $(this);
+        const isNowOpen = this.open;
+        
+        // When any is opened, open all 3
+        if (isNowOpen) {
+          $firstRowAccordions.each(function() {
+            this.open = true;
+          });
+        } else {
+          // When any is closed, close all 3
+          $firstRowAccordions.each(function() {
+            this.open = false;
+          });
         }
       });
     },

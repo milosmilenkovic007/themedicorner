@@ -45,6 +45,96 @@
             "new_lines": ""
         },
         {
+            "key": "field_package_bg_color",
+            "label": "Package Background Color",
+            "name": "package_bg_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Background color for the package sections accordion on single package page",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#ebf2f2",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_package_text_color",
+            "label": "Package Text Color",
+            "name": "package_text_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Text color for the package sections accordion",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#053B3F",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_package_icon_bg_color",
+            "label": "Package Icon Background Color",
+            "name": "package_icon_bg_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Background color for checkmark icons (circle background)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#1EAFA0",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_package_icon_color",
+            "label": "Package Icon Color",
+            "name": "package_icon_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Color for the checkmark symbol itself",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#ffffff",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_package_arrow_color",
+            "label": "Package Arrow Color",
+            "name": "package_arrow_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "Color for accordion arrow icons",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "#053B3F",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
             "key": "field_package_is_additional",
             "label": "Additional Package",
             "name": "is_additional_package",
@@ -63,6 +153,317 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_package_cta_heading",
+            "label": "CTA Heading",
+            "name": "package_cta_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Heading for the call-to-action section (e.g., \"Ready to choose this package?\")",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Ready to choose this package?",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_package_cta_subheading",
+            "label": "CTA Subheading",
+            "name": "package_cta_subheading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Subheading for the call-to-action section",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Contact us today for a free consultation and booking",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_package_cta_image",
+            "label": "CTA Image",
+            "name": "package_cta_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Image for the CTA section",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_package_cta_button_text",
+            "label": "CTA Button Text",
+            "name": "package_cta_button_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Button text for CTA",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Book Now",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_package_cta_button_link",
+            "label": "CTA Button Link",
+            "name": "package_cta_button_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Link for the CTA button",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_package_testimonials_title",
+            "label": "Testimonials Title",
+            "name": "package_testimonials_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Title for testimonials section",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "What Our Patients Say",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_package_testimonials_shortcode",
+            "label": "Testimonials Shortcode",
+            "name": "package_testimonials_shortcode",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Testimonials slider shortcode (e.g., [testimonials_slider])",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_package_final_cta_heading",
+            "label": "Final CTA Heading",
+            "name": "package_final_cta_heading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Main heading for the final CTA section",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Guiding your journey to better health, meet TheMedicorner\u00ae",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_package_final_cta_features",
+            "label": "Final CTA Features",
+            "name": "package_final_cta_features",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Add features for the final CTA section",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Feature",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_package_final_cta_feature_icon",
+                    "label": "Icon",
+                    "name": "icon",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "thumbnail"
+                },
+                {
+                    "key": "field_package_final_cta_feature_title",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_package_final_cta_feature_description",
+                    "label": "Description",
+                    "name": "description",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 3,
+                    "placeholder": "",
+                    "new_lines": ""
+                }
+            ]
+        },
+        {
+            "key": "field_package_final_cta_button_text",
+            "label": "Final CTA Button Text",
+            "name": "package_final_cta_button_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Button text for the final CTA",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Schedule Appointment",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_package_final_cta_button_link",
+            "label": "Final CTA Button Link",
+            "name": "package_final_cta_button_link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Link for the final CTA button",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_package_final_cta_image",
+            "label": "Final CTA Image",
+            "name": "package_final_cta_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Image for the right side of the CTA section",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
         },
         {
             "key": "field_package_include_sections",

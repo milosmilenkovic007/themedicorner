@@ -1,0 +1,692 @@
+// Single Package Template Styles
+// Professional layout for Package detail pages
+
+.single-package {
+    background: #f8f9fa;
+}
+
+.btn {
+    color:#fff!important;
+}
+
+// ============================================
+// Package Hero Banner (Inherits from hero-section-module)
+// ============================================
+.package-hero-banner {
+    margin-bottom: 60px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 40px;
+    }
+}
+
+// ============================================
+// Content Section
+// ============================================
+.package-content {
+    background: white;
+    padding: 60px 20px;
+    margin-bottom: 60px;
+
+    @media (max-width: 768px) {
+        padding: 40px 20px;
+        margin-bottom: 40px;
+    }
+
+    &__inner {
+        max-width: 800px;
+        margin: 0 auto;
+
+        p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+            color: #4a5568;
+            font-size: 1.05rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        h2, h3, h4 {
+            margin: 30px 0 15px;
+            color: #2d3748;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 20px;
+
+            li {
+                margin-bottom: 10px;
+                line-height: 1.6;
+            }
+        }
+    }
+}
+
+// ============================================
+// Package Sections - Accordion Style (matching packages-details)
+// ============================================
+.package-sections {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 60px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 40px;
+    }
+
+    &__heading {
+        text-align: center;
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #053B3F;
+        margin: 0 0 16px;
+        line-height: 1.2;
+
+        @media (max-width: 768px) {
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+        }
+    }
+
+    &__subheading {
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto 40px;
+        color: #294244;
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 1.6;
+
+        @media (max-width: 768px) {
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__accordion {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+
+        @media (max-width: 968px) {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 24px !important;
+        }
+
+        // Četvrti element ide u full width preko sve 3 kolone
+        .package-sections__accordion-item:nth-child(4) {
+            grid-column: 1 / -1;
+        }
+    }
+}
+
+.package-sections__accordion-item {
+    border: 1px solid rgba(5, 59, 63, 0.12);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--pkg-bg-color, #ebf2f2);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(5, 59, 63, 0.08);
+    }
+}
+
+.package-sections__accordion-summary {
+    cursor: pointer;
+    padding: 20px 24px;
+    padding-right: 50px;
+    font-weight: 700;
+    color: var(--pkg-text-color, #053B3F);
+    list-style: none;
+    position: relative;
+    background: color-mix(in srgb, var(--pkg-bg-color, #ebf2f2) 85%, black);
+    transition: background-color 0.2s ease;
+    user-select: none;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba(5, 59, 63, 0.25);
+        outline-offset: 2px;
+    }
+
+    &:hover {
+        background-color: rgba(235, 242, 242, 0.5);
+    }
+
+    // Arrow icon (down when closed, up when open)
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid var(--pkg-arrow-color, #053B3F);
+        border-bottom: 2px solid var(--pkg-arrow-color, #053B3F);
+        transform: translateY(-75%) rotate(45deg);
+        transition: transform 0.3s ease;
+        opacity: 0.8;
+    }
+
+    .package-sections__title-line-1 {
+        display: block;
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+
+    .package-sections__title-line-2 {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--pkg-text-color, #053B3F);
+        margin-top: 4px;
+        opacity: 0.85;
+    }
+}
+
+.package-sections__accordion-item[open] {
+    .package-sections__accordion-summary::after {
+        transform: translateY(-25%) rotate(-135deg);
+        opacity: 1;
+    }
+}
+
+.package-sections__accordion-content {
+    padding: 0 24px 24px;
+    background: var(--pkg-bg-color, #ebf2f2);
+}
+
+.package-sections__list {
+    list-style: none;
+    margin: 0;
+    padding: 16px 0 0;
+}
+
+// 4th accordion - three columns layout
+.package-sections__accordion-item:nth-child(4) {
+    .package-sections__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px 24px;
+
+        @media (max-width: 968px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+}
+
+.package-sections__list-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--pkg-text-color, #053B3F);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &::before {
+        content: '✓';
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        background: var(--pkg-icon-bg-color, #1EAFA0);
+        color: var(--pkg-icon-color, #ffffff);
+        border-radius: 50%;
+        font-size: 0.7rem;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+}
+
+.package-sections__text {
+    flex: 1;
+}
+
+// ============================================
+// Flexible Modules
+// ============================================
+.package-modules {
+    margin-bottom: 60px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 40px;
+    }
+}
+
+// ============================================
+// CTA Footer
+// ============================================
+.package-cta-footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    margin-bottom: 80px;
+
+    @media (max-width: 768px) {
+        padding: 60px 20px;
+        margin-bottom: 60px;
+    }
+
+    &__inner {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    h2 {
+        margin: 0 0 20px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+
+        @media (max-width: 768px) {
+            font-size: 1.8rem;
+        }
+    }
+
+    p {
+        margin: 0 0 30px;
+        font-size: 1.1rem;
+        opacity: 0.95;
+        line-height: 1.6;
+    }
+}
+
+// ============================================
+// Related Packages
+// ============================================
+.package-related {
+    background: white;
+    padding: 80px 20px;
+
+    @media (max-width: 768px) {
+        padding: 60px 20px;
+    }
+
+    &__title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 50px;
+        color: #2d3748;
+
+        @media (max-width: 768px) {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+}
+
+.package-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &:hover {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        transform: translateY(-8px);
+        border-color: #667eea;
+    }
+
+    &__image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+
+        @media (max-width: 768px) {
+            height: 150px;
+        }
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+
+        .package-card:hover & {
+            transform: scale(1.05);
+        }
+    }
+
+    &__content {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        margin: 0 0 12px;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.3;
+
+        a {
+            color: #2d3748;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #667eea;
+            }
+        }
+    }
+
+    &__description {
+        margin: 0 0 15px;
+        font-size: 0.95rem;
+        color: #718096;
+        line-height: 1.5;
+        flex-grow: 1;
+    }
+
+    &__pricing {
+        margin: 15px 0;
+        padding-top: 15px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    &__price {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #667eea;
+    }
+
+    &__link {
+        margin-top: 15px;
+    }
+}
+
+// ============================================
+// Responsive Adjustments
+// ============================================
+@media (max-width: 480px) {
+    .package-hero {
+        &__title {
+            font-size: 1.5rem;
+        }
+
+        &__price {
+            font-size: 1.8rem;
+        }
+
+        &__cta {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .package-related__title {
+        font-size: 1.3rem;
+    }
+
+    .package-cta-footer h2 {
+        font-size: 1.5rem;
+    }
+}
+
+// Other Packages Section
+.other-packages {
+    padding: 100px 20px;
+    background: #f8f8f8;
+
+    @media (max-width: 968px) {
+        padding: 80px 20px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 60px 20px;
+    }
+
+    &__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    &__header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 60px;
+
+        @media (max-width: 968px) {
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 768px) {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 0 0 20px;
+        color: #053B3F;
+
+        @media (max-width: 968px) {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+    }
+
+    &__subtitle {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #666;
+        margin: 0;
+
+        @media (max-width: 768px) {
+            font-size: 1rem;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        align-items: start;
+
+        @media (max-width: 968px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+
+    &__card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    &__card-link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &__image {
+        width: 100%;
+        height: 240px;
+        overflow: hidden;
+        background: #e0e0e0;
+        border-radius: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 0;
+        }
+    }
+
+    &__content {
+        padding: 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: 768px) {
+            padding: 25px;
+        }
+    }
+
+    &__card-title {
+      font-size: 1.5rem !important;
+      font-weight: 700 !important;
+       color: #053b3f;
+       margin: 0 0 15px;
+       line-height: 1.3 !important;
+
+        @media (max-width: 768px) {
+            font-size: 1.3rem!important;
+        }
+    }
+
+    &__description {
+        font-size: 1rem;
+        color: #666;
+        line-height: 1.6;
+        margin: 0 0 25px;
+        flex: 1;
+
+        @media (max-width: 768px) {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+    }
+
+    &__read-more {
+        margin-top: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1EAFA0;
+        transition: gap 0.3s ease;
+
+        &:hover {
+            gap: 12px;
+        }
+    }
+
+    &__arrow {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.3s ease;
+
+        .other-packages__card:hover & {
+            transform: translateX(4px);
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .other-packages {
+        &__grid {
+            grid-template-columns: 1fr;
+        }
+
+        &__title {
+            font-size: 1.6rem;
+        }
+
+        &__card-title {
+            font-size: 1.2rem;
+        }
+
+        &__price {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+// ============================================
+// Package Final CTA Section - Button positioning
+// ============================================
+.package-final-cta {
+    .cta-section__button {
+        margin-top: 20px;
+    }
+}

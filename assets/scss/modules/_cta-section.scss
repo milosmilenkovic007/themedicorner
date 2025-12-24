@@ -83,6 +83,9 @@
     background: var(--cta-section-card-bg, #ebf2f2);
     border-radius: 24px;
     padding: 22px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .cta-section__image-wrap {
@@ -110,6 +113,7 @@
 
   .cta-section__button {
     margin-top: 0;
+    align-self: center;
   }
 
   @include max-width($breakpoint-md) {

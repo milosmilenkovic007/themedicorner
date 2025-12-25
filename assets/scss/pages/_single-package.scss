@@ -129,6 +129,13 @@
             padding: 24px !important;
         }
 
+        @media (max-width: 520px) {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 0px !important;
+            background: #fff !important;
+        }
+
         // Četvrti element ide u full width preko sve 3 kolone
         .package-sections__accordion-item:nth-child(4) {
             grid-column: 1 / -1;

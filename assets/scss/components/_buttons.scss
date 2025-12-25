@@ -96,3 +96,10 @@
     }
   }
 }
+
+// Mobile styles for buttons (max-width: 520px)
+@media (max-width: 520px) {
+  .btn .btn__text {
+    font-size: 14px;
+  }
+}

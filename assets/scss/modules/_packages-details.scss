@@ -817,3 +817,10 @@
     gap: 8px;
   }
 }
+
+// Hide support badge on mobile when package-details module is visible
+@include max-width($breakpoint-md) {
+  body:has(.module-packages-details) .support-badge {
+    display: none !important;
+  }
+}

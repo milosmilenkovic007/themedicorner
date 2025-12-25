@@ -13,6 +13,7 @@ $heading     = $data['heading'] ?? '';
 $description = $data['description'] ?? '';
 $selected    = $data['packages'] ?? array();
 $additional_package_raw = $data['additional_package'] ?? array();
+$additional_package_id = 0;
 
 // Normalize relationship return values to IDs.
 if ( is_array( $selected ) ) {
@@ -85,6 +86,16 @@ if ( ! empty( $selected ) ) {
     foreach ( $posts as $p ) {
         $pkg_id = intval( $p->ID );
         $pkg_sections = function_exists( 'get_field' ) ? ( get_field( 'include_sections', $pkg_id ) ?: array() ) : array();
+        $is_additional_pkg = function_exists( 'get_field' ) ? (bool) get_field( 'is_additional_package', $pkg_id ) : false;
+
+        // If marked as "Additional Package", do not place it in the main comparison grid.
+        // Keep only the first such package as the dedicated additional block (unless explicitly set via field).
+        if ( $is_additional_pkg ) {
+            if ( ! $additional_package_id ) {
+                $additional_package_id = $pkg_id;
+            }
+            continue;
+        }
 
         $packages_data[] = array(
             'id' => $pkg_id,
@@ -311,7 +322,6 @@ if ( $pkg_count === 0 ) {
 
         <?php
         // Additional Package: horizontal layout below the main grid
-        $additional_package_id = 0;
         if ( is_array( $additional_package_raw ) && ! empty( $additional_package_raw ) ) {
             $first = reset( $additional_package_raw );
             if ( is_numeric( $first ) ) {

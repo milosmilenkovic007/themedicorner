@@ -275,6 +275,22 @@ import '../scss/main.scss';
         $root.find('details.packages-details__accordion-item').each(function() {
           $(this).attr('open', 'open');
         });
+
+        // Scroll to last accordion (Biochemistry Laboratory) on desktop
+        const $lastRow = $root.find('.packages-details__grid-row[data-pd-row]').last();
+        if ($lastRow.length) {
+          setTimeout(() => {
+            $lastRow[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+
+        // Scroll to last accordion on mobile
+        const $lastAccordion = $root.find('details.packages-details__accordion-item').last();
+        if ($lastAccordion.length) {
+          setTimeout(() => {
+            $lastAccordion[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
       };
 
       const closeAllSections = ($root) => {
@@ -291,6 +307,11 @@ import '../scss/main.scss';
         $root.find('details.packages-details__accordion-item').each(function() {
           $(this).removeAttr('open');
         });
+
+        // Scroll back to the table top
+        setTimeout(() => {
+          $root[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
       };
 
       const resetSectionsState = ($root) => {

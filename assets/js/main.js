@@ -50,20 +50,27 @@ import '../scss/main.scss';
     },
 
     initializePackageAccordions() {
-      // Group collapse/expand: first 3 accordions work together
+      // Group collapse/expand: first 3 accordions work together ONLY on desktop
       const $firstRowAccordions = $('.package-sections__accordion-item:nth-child(1), .package-sections__accordion-item:nth-child(2), .package-sections__accordion-item:nth-child(3)');
+      
+      const isMobileOrTablet = () => window.innerWidth <= 968;
       
       $firstRowAccordions.on('toggle', function() {
         const $this = $(this);
         const isNowOpen = this.open;
         
-        // When any is opened, open all 3
+        // Skip synchronized behavior on mobile/tablet
+        if (isMobileOrTablet()) {
+          return;
+        }
+        
+        // When any is opened, open all 3 (desktop only)
         if (isNowOpen) {
           $firstRowAccordions.each(function() {
             this.open = true;
           });
         } else {
-          // When any is closed, close all 3
+          // When any is closed, close all 3 (desktop only)
           $firstRowAccordions.each(function() {
             this.open = false;
           });

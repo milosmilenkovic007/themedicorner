@@ -58,7 +58,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "#ebf2f2",
+            "default_value": "#f2ecf2",
             "enable_opacity": 0,
             "return_format": "string"
         },
@@ -76,7 +76,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "#053B3F",
+            "default_value": "#340629",
             "enable_opacity": 0,
             "return_format": "string"
         },
@@ -130,7 +130,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "#053B3F",
+            "default_value": "#340629",
             "enable_opacity": 0,
             "return_format": "string"
         },

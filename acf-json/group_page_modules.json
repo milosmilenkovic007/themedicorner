@@ -29,7 +29,7 @@
                         {"key": "field_hero_height", "label": "Hero Height", "name": "height", "type": "select", "choices": {"auto": "Auto", "small": "Small (400px)", "medium": "Medium (600px)", "large": "Large (800px)", "full": "Full Screen"}, "default_value": "large"},
                         {"key": "field_hero_button_text", "label": "Button Text", "name": "button_text", "type": "text"},
                         {"key": "field_hero_button_link", "label": "Button Link", "name": "button_link", "type": "url"},
-                        {"key": "field_hero_bg_color", "label": "Content Background Color", "name": "bg_color", "type": "color_picker", "default_value": "#EBF2F2"}
+                        {"key": "field_hero_bg_color", "label": "Content Background Color", "name": "bg_color", "type": "color_picker", "default_value": "#f2ecf2"}
                     ],
                     "min": "",
                     "max": ""
@@ -103,10 +103,10 @@
                         {"key": "field_cta_pkg_button_link", "label": "Button Link", "name": "button_link", "type": "url"},
                         {"key": "field_cta_pkg_image", "label": "Image", "name": "image", "type": "image", "return_format": "array", "preview_size": "medium"},
                         {"key": "field_cta_pkg_style_tab", "label": "Style", "name": "", "type": "tab", "placement": "top"},
-                        {"key": "field_cta_pkg_bg_block_color", "label": "Background Block Color", "name": "bg_block_color", "type": "color_picker", "default_value": "#EBF2F2", "instructions": "Outer container background"},
+                        {"key": "field_cta_pkg_bg_block_color", "label": "Background Block Color", "name": "bg_block_color", "type": "color_picker", "default_value": "#f2ecf2", "instructions": "Outer container background"},
                         {"key": "field_cta_pkg_bg_inner_color", "label": "Background Inner Color", "name": "bg_inner_color", "type": "color_picker", "default_value": "#FFFFFF", "instructions": "Inner content background (image side)"},
                         {"key": "field_cta_pkg_heading_color", "label": "Heading Color", "name": "heading_color", "type": "color_picker", "default_value": "#1EAFA0"},
-                        {"key": "field_cta_pkg_subheading_color", "label": "Subheading Color", "name": "subheading_color", "type": "color_picker", "default_value": "#053B3F"},
+                        {"key": "field_cta_pkg_subheading_color", "label": "Subheading Color", "name": "subheading_color", "type": "color_picker", "default_value": "#340629"},
                         {"key": "field_cta_pkg_button_text_color", "label": "Button Text Color", "name": "button_text_color", "type": "color_picker", "default_value": "#FFFFFF"},
                         {"key": "field_cta_pkg_button_bg_color", "label": "Button Background Color", "name": "button_bg_color", "type": "color_picker", "default_value": "#1EAFA0"}
                     ],

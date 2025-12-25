@@ -33,10 +33,10 @@ if ( is_array( $image_raw ) ) {
 }
 
 // Style options
-$bg_block_color = $data['bg_block_color'] ?? '#EBF2F2';
+$bg_block_color = $data['bg_block_color'] ?? '#f2ecf2';
 $bg_inner_color = $data['bg_inner_color'] ?? '#FFFFFF';
 $heading_color = $data['heading_color'] ?? '#1EAFA0';
-$subheading_color = $data['subheading_color'] ?? '#053B3F';
+$subheading_color = $data['subheading_color'] ?? '#340629';
 $button_text_color = $data['button_text_color'] ?? '#FFFFFF';
 $button_bg_color = $data['button_bg_color'] ?? '#1EAFA0';
 

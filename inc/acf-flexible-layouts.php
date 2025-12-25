@@ -91,10 +91,10 @@ function hello_child_render_flexible_layout( $layout ) {
             $data['button_text']          = $layout['field_cta_pkg_button_text'] ?? '';
             $data['button_link']          = $layout['field_cta_pkg_button_link'] ?? '';
             $data['image']                = $layout['field_cta_pkg_image'] ?? array();
-            $data['bg_block_color']       = $layout['field_cta_pkg_bg_block_color'] ?? '#EBF2F2';
+            $data['bg_block_color']       = $layout['field_cta_pkg_bg_block_color'] ?? '#f2ecf2';
             $data['bg_inner_color']       = $layout['field_cta_pkg_bg_inner_color'] ?? '#FFFFFF';
             $data['heading_color']        = $layout['field_cta_pkg_heading_color'] ?? '#1EAFA0';
-            $data['subheading_color']     = $layout['field_cta_pkg_subheading_color'] ?? '#053B3F';
+            $data['subheading_color']     = $layout['field_cta_pkg_subheading_color'] ?? '#340629';
             $data['button_text_color']    = $layout['field_cta_pkg_button_text_color'] ?? '#FFFFFF';
             $data['button_bg_color']      = $layout['field_cta_pkg_button_bg_color'] ?? '#1EAFA0';
             $data['acf_fc_layout'] = $layout['acf_fc_layout'];

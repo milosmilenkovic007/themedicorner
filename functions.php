@@ -134,6 +134,30 @@ function hello_child_register_packages_taxonomies() {
 add_action( 'init', 'hello_child_register_packages_taxonomies' );
 
 /**
+ * Redirect Packages archive (and related taxonomies) to the curated /our-packages/ page on frontend.
+ */
+function hello_child_redirect_package_archive() {
+    if ( is_admin() || is_feed() || is_preview() ) {
+        return;
+    }
+
+    // Avoid interfering with REST/AJAX.
+    if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+        return;
+    }
+
+    $should_redirect = is_post_type_archive( 'package' ) || is_tax( array( 'package_category', 'package_tag' ) );
+    if ( ! $should_redirect ) {
+        return;
+    }
+
+    $target = home_url( '/our-packages/' );
+    wp_safe_redirect( $target, 301 );
+    exit;
+}
+add_action( 'template_redirect', 'hello_child_redirect_package_archive' );
+
+/**
  * Admin UI tweaks for ACF fields
  */
 add_action( 'admin_head', function() {

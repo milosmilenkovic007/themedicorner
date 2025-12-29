@@ -35,10 +35,10 @@ if ( is_array( $image_raw ) ) {
 // Style options
 $bg_block_color = $data['bg_block_color'] ?? '#f2ecf2';
 $bg_inner_color = $data['bg_inner_color'] ?? '#FFFFFF';
-$heading_color = $data['heading_color'] ?? '#1EAFA0';
+$heading_color = $data['heading_color'] ?? '#9a1078';
 $subheading_color = $data['subheading_color'] ?? '#340629';
 $button_text_color = $data['button_text_color'] ?? '#FFFFFF';
-$button_bg_color = $data['button_bg_color'] ?? '#1EAFA0';
+$button_bg_color = $data['button_bg_color'] ?? '#9a1078';
 
 // Build inline styles
 $block_style = sprintf(

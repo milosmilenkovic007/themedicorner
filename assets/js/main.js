@@ -97,8 +97,15 @@ import '../scss/main.scss';
         });
       };
 
+      const focusActiveTab = ($root) => {
+        const $activeTab = $root.find('.packages-details__tab.is-active').first();
+        if ($activeTab.length) {
+          focusElement($activeTab);
+        }
+      };
+
       const activateIndex = ($root, index, opts = {}) => {
-        const { resetState = true, resetBiochem = true } = opts;
+        const { resetState = true, resetBiochem = true, focusTab = false } = opts;
         setActive($root, index);
 
         if (resetState) {
@@ -114,6 +121,10 @@ import '../scss/main.scss';
         // Only meaningful when section states change; harmless otherwise.
         updateToggleAllLabel($root);
         markDiffItems($root);
+
+        if (focusTab) {
+          focusActiveTab($root);
+        }
       };
 
       const normalizeItemText = (text) => {
@@ -253,82 +264,89 @@ import '../scss/main.scss';
           });
       };
 
+      const focusElement = ($el) => {
+        if (!$el || !$el.length) return;
+        const node = $el[0];
+        if (node && typeof node.focus === 'function') {
+          try {
+            node.focus({ preventScroll: true });
+          } catch (e) {
+            node.focus();
+          }
+        }
+        if (node && typeof node.scrollIntoView === 'function') {
+          node.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+        }
+      };
+
       const updateToggleAllLabel = ($root) => {
         const $btn = $root.find('[data-pd-toggle-all]').first();
         if (!$btn.length) return;
 
-        const $rows = $root.find('.packages-details__grid-row[data-pd-row]');
-        const $details = $root.find('details.packages-details__accordion-item');
+        const $bioRow = $root.find('.packages-details__grid-row[data-pd-section="biochemistry-laboratory"]').first();
+        const $bioDetails = $root.find('details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"]').first();
 
-        const allOpenDesktop = $rows.length ? $rows.filter('.is-collapsed').length === 0 : true;
-        const allOpenMobile = $details.length ? $details.filter(':not([open])').length === 0 : true;
-        const allOpen = allOpenDesktop && allOpenMobile;
+        const bioOpenDesktop = $bioRow.length ? !$bioRow.hasClass('is-collapsed') : false;
+        const bioOpenMobile = $bioDetails.length ? $bioDetails.is('[open]') : false;
+        const bioOpen = bioOpenDesktop || bioOpenMobile;
 
-        $btn.text(allOpen ? 'Close all' : 'Show all');
-        $btn.attr('data-state', allOpen ? 'open' : 'closed');
+        $btn.text(bioOpen ? 'Close all' : 'Show all');
+        $btn.attr('data-state', bioOpen ? 'open' : 'closed');
       };
 
-      const openAllSections = ($root) => {
+      const openBiochemistryOnly = ($root) => {
         $root.addClass('pd-show-all');
-        // Desktop
-        $root.find('.packages-details__grid-row[data-pd-row]').each(function() {
-          const $row = $(this);
-          $row.removeClass('is-collapsed');
-          const $toggle = $row.find('[data-pd-row-toggle]').first();
-          if ($toggle.length) $toggle.attr('aria-expanded', 'true');
-        });
-
-        // Mobile
-        $root.find('details.packages-details__accordion-item').each(function() {
-          $(this).attr('open', 'open');
-        });
-
-        // Scroll to last accordion (Biochemistry Laboratory) on desktop
-        const $lastRow = $root.find('.packages-details__grid-row[data-pd-row]').last();
-        if ($lastRow.length) {
-          setTimeout(() => {
-            $lastRow[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 100);
+        // Desktop: open Biochemistry row only
+        const $bioRow = $root.find('.packages-details__grid-row[data-pd-section="biochemistry-laboratory"]').first();
+        if ($bioRow.length) {
+          $bioRow.removeClass('is-collapsed');
+          const $toggle = $bioRow.find('[data-pd-row-toggle]').first();
+          if ($toggle.length) {
+            $toggle.attr('aria-expanded', 'true');
+            focusElement($toggle);
+          } else {
+            focusElement($bioRow);
+          }
         }
 
-        // Scroll to last accordion on mobile
-        const $lastAccordion = $root.find('details.packages-details__accordion-item').last();
-        if ($lastAccordion.length) {
-          setTimeout(() => {
-            $lastAccordion[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 100);
+        // Mobile: open Biochemistry accordion only
+        const $bioDetails = $root.find('details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"]').first();
+        if ($bioDetails.length) {
+          $bioDetails.attr('open', 'open');
+          const $summary = $bioDetails.find('summary').first();
+          focusElement($summary.length ? $summary : $bioDetails);
         }
       };
 
-      const closeAllSections = ($root) => {
+      const closeBiochemistryOnly = ($root) => {
         $root.removeClass('pd-show-all');
-        // Desktop
-        $root.find('.packages-details__grid-row[data-pd-row]').each(function() {
-          const $row = $(this);
-          $row.addClass('is-collapsed');
-          const $toggle = $row.find('[data-pd-row-toggle]').first();
+        const $bioRow = $root.find('.packages-details__grid-row[data-pd-section="biochemistry-laboratory"]').first();
+        if ($bioRow.length) {
+          $bioRow.addClass('is-collapsed');
+          const $toggle = $bioRow.find('[data-pd-row-toggle]').first();
           if ($toggle.length) $toggle.attr('aria-expanded', 'false');
-        });
+        }
 
-        // Mobile
-        $root.find('details.packages-details__accordion-item').each(function() {
-          $(this).removeAttr('open');
-        });
+        const $bioDetails = $root.find('details.packages-details__accordion-item[data-pd-section="biochemistry-laboratory"]').first();
+        if ($bioDetails.length) {
+          $bioDetails.removeAttr('open');
+        }
 
-        // Scroll back to the table top
-        setTimeout(() => {
-          $root[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+        // Return focus to the table header area for accessibility
+        const $firstToggle = $root.find('.packages-details__section-title[data-pd-row-toggle]').first();
+        focusElement($firstToggle.length ? $firstToggle : $root);
       };
 
       const resetSectionsState = ($root) => {
         // Desktop rows
         const $rows = $root.find('.packages-details__grid-row[data-pd-row]');
         if ($rows.length) {
+          const totalRows = $rows.length;
           $rows.each(function(i) {
             const $row = $(this);
             const $toggle = $row.find('[data-pd-row-toggle]').first();
-            const shouldOpen = i === 0;
+            // Open all except the last one
+            const shouldOpen = i < (totalRows - 1);
             $row.toggleClass('is-collapsed', !shouldOpen);
             if ($toggle.length) {
               $toggle.attr('aria-expanded', shouldOpen ? 'true' : 'false');
@@ -339,8 +357,10 @@ import '../scss/main.scss';
         // Mobile <details>
         const $details = $root.find('.packages-details__accordion-item');
         if ($details.length) {
+          const totalDetails = $details.length;
           $details.each(function(i) {
-            if (i === 0) {
+            // Open all except the last one
+            if (i < (totalDetails - 1)) {
               $(this).attr('open', 'open');
             } else {
               $(this).removeAttr('open');
@@ -354,7 +374,7 @@ import '../scss/main.scss';
         const $root = $(this);
         const $first = $root.find('.packages-details__tab').first();
         const initIdx = $first.length ? Number($first.data('index')) : 0;
-        activateIndex($root, Number.isNaN(initIdx) ? 0 : initIdx, { resetState: true, resetBiochem: true });
+        activateIndex($root, Number.isNaN(initIdx) ? 0 : initIdx, { resetState: true, resetBiochem: true, focusTab: false });
       });
 
       // Click handler
@@ -364,7 +384,7 @@ import '../scss/main.scss';
         if (!$root.length) return;
 
         // Explicit tab click keeps the existing behavior: reset open state back to the first section.
-        activateIndex($root, $btn.data('index'), { resetState: true, resetBiochem: true });
+        activateIndex($root, $btn.data('index'), { resetState: true, resetBiochem: true, focusTab: true });
       });
 
       // Desktop: clicking anywhere in a package column switches the active package.
@@ -378,7 +398,7 @@ import '../scss/main.scss';
         const col = Number($cell.data('col'));
         if (Number.isNaN(col)) return;
 
-        activateIndex($root, col, { resetState: false, resetBiochem: false });
+        activateIndex($root, col, { resetState: false, resetBiochem: false, focusTab: true });
       });
 
       // Show all / Close all
@@ -391,9 +411,9 @@ import '../scss/main.scss';
         const shouldClose = state === 'open';
 
         if (shouldClose) {
-          closeAllSections($root);
+          closeBiochemistryOnly($root);
         } else {
-          openAllSections($root);
+          openBiochemistryOnly($root);
         }
 
         // Keep Biochemistry behavior consistent when bulk-toggling.

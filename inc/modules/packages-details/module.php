@@ -283,8 +283,9 @@ if ( $pkg_count === 0 ) {
                         if ( ! is_array( $sec ) ) { continue; }
                         $line1 = (string) ( $sec['title_line_1'] ?? '' );
                         $line2 = (string) ( $sec['title_line_2'] ?? '' );
-                        // Open first 2 sections by default
-                        $is_open = $sec_idx < 2;
+                        // Open all sections except the last one by default
+                        $total_sections = count( $sections_order );
+                        $is_open = $sec_idx < ( $total_sections - 1 );
                     ?>
                     <details class="packages-details__accordion-item" data-pd-section="<?php echo esc_attr( (string) $sec_key ); ?>"<?php echo $is_open ? ' open' : ''; ?>>
                         <summary class="packages-details__accordion-summary">

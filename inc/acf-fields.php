@@ -377,7 +377,7 @@ function hello_child_register_acf_field_groups() {
                                 'label' => 'Subheading Color',
                                 'name' => 'subheading_color',
                                 'type' => 'color_picker',
-                                'default_value' => '#340629',
+                                'default_value' => '#053b3f',
                             ),
                             array(
                                 'key' => 'field_cta_pkg_button_text_color',
@@ -557,7 +557,7 @@ function hello_child_register_acf_field_groups() {
                 'name' => 'package_text_color',
                 'type' => 'color_picker',
                 'instructions' => 'Text color for the package sections accordion',
-                'default_value' => '#340629',
+                'default_value' => '#053b3f',
                 'wrapper' => array(
                     'width' => '33',
                 ),
@@ -590,7 +590,7 @@ function hello_child_register_acf_field_groups() {
                 'name' => 'package_arrow_color',
                 'type' => 'color_picker',
                 'instructions' => 'Color for accordion arrow icons',
-                'default_value' => '#340629',
+                'default_value' => '#053b3f',
                 'wrapper' => array(
                     'width' => '50',
                 ),

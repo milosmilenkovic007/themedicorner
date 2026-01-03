@@ -94,7 +94,7 @@ function hello_child_render_flexible_layout( $layout ) {
             $data['bg_block_color']       = $layout['field_cta_pkg_bg_block_color'] ?? '#f2ecf2';
             $data['bg_inner_color']       = $layout['field_cta_pkg_bg_inner_color'] ?? '#FFFFFF';
             $data['heading_color']        = $layout['field_cta_pkg_heading_color'] ?? '#9a1078';
-            $data['subheading_color']     = $layout['field_cta_pkg_subheading_color'] ?? '#340629';
+            $data['subheading_color']     = $layout['field_cta_pkg_subheading_color'] ?? '#053b3f';
             $data['button_text_color']    = $layout['field_cta_pkg_button_text_color'] ?? '#FFFFFF';
             $data['button_bg_color']      = $layout['field_cta_pkg_button_bg_color'] ?? '#9a1078';
             $data['acf_fc_layout'] = $layout['acf_fc_layout'];

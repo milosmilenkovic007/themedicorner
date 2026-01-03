@@ -40,7 +40,7 @@
     text-align: center;
     max-width: 720px;
     margin: 0 auto 34px;
-    color: #340629;
+    color: #053b3f;
     font-size: 19px;
     font-weight: 400;
     line-height: 1.8em;
@@ -75,7 +75,7 @@
 
   .packages-details__tab {
     --pd-tab-bg: #f2ecf2;
-    --pd-tab-fg: #340629;
+    --pd-tab-fg: #053b3f;
 
     appearance: none;
     box-sizing: border-box;
@@ -113,17 +113,17 @@
   // Per-tab colors
   .packages-details__tab--0 {
     --pd-tab-bg: #f2ecf2;
-    --pd-tab-fg: #340629;
+    --pd-tab-fg: #053b3f;
   }
 
   .packages-details__tab--1 {
-    --pd-tab-bg: #340629;
+    --pd-tab-bg: #053b3f;
     --pd-tab-fg: #ffffff;
   }
 
   .packages-details__tab--2 {
     --pd-tab-bg: #fed36e;
-    --pd-tab-fg: #340629;
+    --pd-tab-fg: #053b3f;
   }
 
   .packages-details__table {
@@ -172,12 +172,12 @@
   .packages-details__col-head {
     text-align: center;
     font-weight: 700;
-    color: #340629;
+    color: #053b3f;
   }
 
   .packages-details__section-title {
     font-weight: 700;
-    color: #340629;
+    color: #053b3f;
     cursor: pointer;
     user-select: none;
     position: relative;
@@ -292,7 +292,7 @@
 
     // Second package column
     .packages-details__items[data-col="1"] {
-      background: #340629;
+      background: #053b3f;
 
       .packages-details__list-item,
       .packages-details__text {
@@ -324,7 +324,7 @@
 
     // Keep other columns the same
     .packages-details__items[data-col="1"] {
-      background: #340629;
+      background: #053b3f;
 
       .packages-details__list-item,
       .packages-details__text {
@@ -347,11 +347,11 @@
     // Only the left section column changes (Medical Examinations, etc.)
     .packages-details__section-title {
       background: #f2ecf2;
-      color: #340629;
+      color: #053b3f;
     }
 
     .packages-details__items[data-col="1"] {
-      background: #340629;
+      background: #053b3f;
 
       .packages-details__list-item,
       .packages-details__text {
@@ -442,7 +442,7 @@
 
   .packages-details__toggle-all {
     appearance: none;
-    background: #340629;
+    background: #053b3f;
     border: 0px solid rgba(5, 59, 63, .25);
     color: #ffffff;
     border-radius: 10px;
@@ -516,7 +516,7 @@
       padding: 16px;
       padding-right: 44px;
       font-weight: 700;
-      color: #340629;
+      color: #053b3f;
       list-style: none;
       position: relative;
 
@@ -618,7 +618,7 @@
 
     .packages-details.is-active-1 {
       .packages-details__accordion-item {
-        background: #340629;
+        background: #053b3f;
 
         .packages-details__accordion-summary,
         .packages-details__accordion-summary *,
@@ -633,7 +633,7 @@
       }
 
       .packages-details__accordion-panel[data-col="1"] {
-        background: #340629;
+        background: #053b3f;
 
         .packages-details__list-item,
         .packages-details__text {
@@ -654,7 +654,7 @@
         .packages-details__accordion-summary *,
         .packages-details__list-item,
         .packages-details__text {
-          color: #340629;
+          color: #053b3f;
         }
       }
 
@@ -715,7 +715,7 @@
   .packages-details__additional-title {
     font-size: 16px;
     font-weight: 700;
-    color: #340629;
+    color: #053b3f;
     margin: 0;
     line-height: 1.3;
     cursor: pointer;
@@ -798,7 +798,7 @@
     }
   .packages-details__additional-section-title {
     font-weight: 700;
-    color: #340629;
+    color: #053b3f;
     margin-bottom: 12px;
     font-size: 14px;
     line-height: 1.3;
